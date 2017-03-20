@@ -14,13 +14,13 @@ public class test
 {
     public static void main (String args []) throws SQLException, IOException
     {
-        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+     /*   DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         Connection conn = DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1522:ug", "ora_i2c0b", "a41374142");
 
         if (conn != null) {
             System.out.println("Connected");
-        }
+        }*/
 
 
     }
