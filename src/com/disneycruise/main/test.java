@@ -16,7 +16,11 @@ public class test
     {
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         Connection conn = DriverManager.getConnection(
-                "jdbc:oracle:thin:@dbhost.ugrad.cs.ubc.ca:1522:ug", "ora_i2c0b", "a41374142");
+                "jdbc:oracle:thin:@localhost:1522:ug", "ora_i2c0b", "a41374142");
+
+        if (conn != null) {
+            System.out.println("Connected");
+        }
 
 
     }
