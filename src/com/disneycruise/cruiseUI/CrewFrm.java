@@ -1,4 +1,8 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
+
+import com.disneycruise.cruise.CrewTableViews;
+import java.sql.*;
+import java.util.Vector;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -20,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class CrewFrm extends JFrame {
 
@@ -112,38 +117,48 @@ public class CrewFrm extends JFrame {
 		lblFindCrewBy.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblFindCrewBy.setBounds(699, 217, 231, 21);
 		contentPane.add(lblFindCrewBy);
+
+		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBounds(962, 0, 950, 986);
 		
 		JButton btnFindCrew = new JButton("Find");
 		btnFindCrew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * replace this commented block
-				 * with your query database code 
-				 * search crew by workplace from database,  
-				 * display all crews if no workplace provide
-				 * workplace info. is in variable workplace_textField
-				 * isManager info. is in variable isManager_CheckBox
-				 */
-				
-				//fillTable(new Object());
-			}
-		});
-		btnFindCrew.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnFindCrew.setBounds(752, 368, 123, 29);
-		contentPane.add(btnFindCrew);
-		
-		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(962, 0, 950, 986);
-		btnBrowse_schedule.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String crwid = crewId_textField.getText();
-				if(StringUtil.isEmpty(crwid)){
-					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty£¡");
+
+				String workplace  = workplace_textField.getText();
+				if(StringUtil.isEmpty(workplace)){
+					JOptionPane.showMessageDialog(null, "crew_id CANNOT be emptyï¿½ï¿½");
 					return;
 				}
 				if(!crwSchOpen){
 					crwSchOpen=true;
-					crwSchIF= new CrewScheduleInterFrm(crwid);
+					crwSchIF= new CrewScheduleInterFrm(workplace, true, false);
+					crwSchIF.setVisible(true);
+					desktopPane.add(crwSchIF);
+				}else{
+					crwSchOpen=false;
+					crwSchIF.dispose();
+
+				}
+			}
+
+		});
+		btnFindCrew.setFont(new Font("Arial", Font.PLAIN, 18));
+		btnFindCrew.setBounds(752, 368, 123, 29);
+		contentPane.add(btnFindCrew);
+		contentPane.add(desktopPane);
+
+
+		btnBrowse_schedule.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String crwid = crewId_textField.getText();
+				if(StringUtil.isEmpty(crwid)){
+					JOptionPane.showMessageDialog(null, "crew_id CANNOT be emptyï¿½ï¿½");
+					return;
+				}
+				if(!crwSchOpen){
+					crwSchOpen=true;
+					crwSchIF= new CrewScheduleInterFrm(crwid, false, true);
 					crwSchIF.setVisible(true);
 					desktopPane.add(crwSchIF);
 				}else{
@@ -160,20 +175,26 @@ public class CrewFrm extends JFrame {
 	private void fillTable(Object o) {
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
-		/*
-		 * replace this commented block
-		 * with your query database code 
-		 * to get all crew data from database as variable rs if no workplace information provide
-			
+
+		CrewTableViews ctv = new CrewTableViews();
+		ResultSet rs = ctv.getCrewTableViews();
+		try {
 			while (rs.next()) {
 				Vector v = new Vector();
-				v.add(rs.getString("passengerName"));
-				v.add(rs.getString("cid"));			
-				...
+				v.add(rs.getString("crew_id"));
+				v.add(rs.getString("cname"));
+				v.add(rs.getString("department"));
+				v.add(rs.getString("cid"));
+				v.add(rs.getString("csid"));
+				v.add(rs.getString("esid"));
+
+			//	v.add(rs.getString("man_id"));
+
 				dtm.addRow(v);
 			}
-		*/
-	
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	
 	private boolean crwSchOpen=false;

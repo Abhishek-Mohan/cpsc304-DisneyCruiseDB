@@ -1,4 +1,6 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
+
+import com.disneycruise.cruise.PassengerTableViews;
 
 import java.awt.EventQueue;
 
@@ -12,6 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 
 public class ActivityBrowseInterFrm extends JInternalFrame {
 	private JTable act_table;
@@ -121,8 +126,15 @@ public class ActivityBrowseInterFrm extends JInternalFrame {
 				 * with your query database code 
 				 * to search activity by give information, if no information then return all activity
 				 */
-				
-				//fillTable();
+
+				String startTime = startTime_textField.getText();
+				String endTime = endTime_textField.getText();
+				String location = location_textField.getText();
+				String date = date_textField.getText();
+				String type = type_textField.getText();
+
+
+				fillTable(new Object(), false);
 			}
 		});
 		btnSearch.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -136,34 +148,65 @@ public class ActivityBrowseInterFrm extends JInternalFrame {
 				 * with your query database code 
 				 * to find a/some activity(s) which is in every passenger's schedule
 				 */
+				String startTime = startTime_textField.getText();
+				String endTime = endTime_textField.getText();
+				String location = location_textField.getText();
+				String date = date_textField.getText();
+				String type = type_textField.getText();
+
+
 				
-				//fillTable();
+				fillTable(new Object(), true);
 			}
 		});
 		btnPopularActivity.setFont(new Font("Arial", Font.PLAIN, 18));
 		btnPopularActivity.setBounds(689, 499, 183, 29);
 		getContentPane().add(btnPopularActivity);
-		this.fillTable(new Object());
+		this.fillTable(new Object(), false);
+
 
 	}
 	
-	private void fillTable(Object o) {
+	private void fillTable(Object o, boolean isPopularPressed) {
 		DefaultTableModel dtm = (DefaultTableModel) act_table.getModel();
 		dtm.setRowCount(0);
 		/*
 		 * replace this commented block
 		 * with your query database code 
 		 * to get all passenger data from database as variable rs
-			
-			while (rs.next()) {
-				Vector v = new Vector();
-				v.add(rs.getInt("eid"));
-				v.add(rs.getString("type"));		
-				...
-				dtm.addRow(v);
-			}
 		*/
-	
+		String startTime = startTime_textField.getText();
+		String endTime = endTime_textField.getText();
+		String location = location_textField.getText();
+		String date = date_textField.getText();
+		String type = type_textField.getText();
+		PassengerTableViews	pv = new PassengerTableViews();
+		ResultSet rs;
+		if (!isPopularPressed) {
+			rs = pv.getBrowseActivityTableView(type, location, startTime, endTime, date);
+		} else {
+			rs = pv.getPopularActivityTables();
+		}
+			try {
+				while (rs.next()) {
+					Vector v = new Vector();
+					v.add(rs.getString("eid"));
+					v.add("-");
+					v.add(rs.getString("ename"));
+					v.add(rs.getString("eloc"));
+					v.add("-");
+					v.add(rs.getDate("edate"));
+					v.add(rs.getObject("en_stime"));
+					v.add(rs.getObject("en_etime"));
+
+					dtm.addRow(v);
+				}
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+
+			}
+
 	}
 
 }

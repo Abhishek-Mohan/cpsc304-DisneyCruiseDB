@@ -1,4 +1,4 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
 
 public class StringUtil {
 	public static boolean isEmpty(String str){

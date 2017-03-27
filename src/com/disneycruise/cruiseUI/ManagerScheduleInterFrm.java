@@ -1,4 +1,4 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
 
 import java.awt.EventQueue;
 
@@ -14,11 +14,15 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.disneycruise.cruise.*;
+import java.sql.*;
+import java.util.Vector;
 
 public class ManagerScheduleInterFrm extends JInternalFrame {
 	private JTable managerSch_table;
 	private JTable managedCrewSch_table;
 	private JTextField esidcsidSchRm_textField;
+	private String manid;
 
 	/**
 	 * Launch the application.
@@ -39,7 +43,10 @@ public class ManagerScheduleInterFrm extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ManagerScheduleInterFrm(String manid) {
+	public ManagerScheduleInterFrm(String input, boolean isManID, boolean isCrewID) {
+		if (isManID) {
+			this.manid = input;
+		}
 		setTitle("Manager's Schedule");
 		setBounds(10, 0, 930, 961);
 		getContentPane().setLayout(null);
@@ -82,7 +89,7 @@ public class ManagerScheduleInterFrm extends JInternalFrame {
 		scrollPane_1.setViewportView(managedCrewSch_table);
 		getContentPane().add(scrollPane_1);
 		
-		JLabel lblManagedCrewsSchedules = new JLabel("Managed Crew's Schedules:");
+		JLabel lblManagedCrewsSchedules = new JLabel("Manage Crew's Schedules:");
 		lblManagedCrewsSchedules.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblManagedCrewsSchedules.setBounds(15, 538, 274, 21);
 		getContentPane().add(lblManagedCrewsSchedules);
@@ -163,43 +170,96 @@ public class ManagerScheduleInterFrm extends JInternalFrame {
 		removeCrwSch_Button.setBounds(697, 400, 172, 29);
 		getContentPane().add(removeCrwSch_Button);
 		this.fillMngSchTable(new Object());
+		this.fillCrwSchTable(new Object(), input, isManID, isCrewID);
 	}
 	
 	private void fillMngSchTable(Object o) {
 		DefaultTableModel dtm = (DefaultTableModel) managerSch_table.getModel();
 		dtm.setRowCount(0);
-		/*
-		 * replace this commented block
-		 * with your query database code 
-		 * to get manager's schedule from database by variable manid 
-			
-			while (rs.next()) {
-				Vector v = new Vector();
-				v.add(rs.getInt("man_id"));
-				v.add(rs.getString("csid"));
-				...
-				dtm.addRow(v);
-			}
-		*/	
-	}
+			System.out.println(manid);
+			ManagerTableViews tv = new ManagerTableViews();
+			ResultSet rs = tv.getManagerScheduleView(manid);
+
+				try {
+					if (tv.getIsEntertainmentManager() != false || tv.getIsCleaningManager() != false) {
+						while (rs.next()) {
+							Vector v = new Vector();
+
+							if (tv.getIsCleaningManager()) {
+
+								v.add(rs.getString("mname"));
+								v.add(rs.getInt("man_id"));
+								v.add(rs.getString("csid"));
+								v.add("-");
+								v.add(rs.getObject("cs_stime"));
+								v.add(rs.getObject("cs_etime"));
+								dtm.addRow(v);
+							}
+
+							if (tv.getIsEntertainmentManager()) {
+								v.add(rs.getInt("man_id"));
+								v.add(rs.getString("mname"));
+								v.add("-");
+								v.add(rs.getString("esid"));
+								v.add("-");
+								v.add("-");
+								dtm.addRow(v);
+							}
+						}
+					}
+
+	} catch (SQLException se) {
+					se.printStackTrace();
+				}
+				}
 	
-	private void fillCrwSchTable(Object o) {
+	private void fillCrwSchTable(Object o, String input, boolean isManID, boolean isCrewID) {
 		DefaultTableModel dtm = (DefaultTableModel) managedCrewSch_table.getModel();
 		dtm.setRowCount(0);
-		/*
-		 * replace this commented block
-		 * with your query database code 
-		 * to get managed crew's schedules from database as variable rs
-			
-			while (rs.next()) {
-				Vector v = new Vector();
-				v.add(rs.getInt("crew_id"));
-				v.add(rs.getString("csid"));
-				...
-				dtm.addRow(v);
+
+		ManagerTableViews tv = new ManagerTableViews();
+		ResultSet rs = null;
+
+		if (isManID) {
+			rs = tv.getManagerCrewScheduleByManID(input);
+		}
+		if (isCrewID) {
+			rs = tv.getManagerCrewScheduleByCrewID(input);
+		}
+
+		try {
+			if (tv.getIsEntertainmentManager() != false || tv.getIsCleaningManager() != false) {
+				while (rs.next()) {
+					Vector v = new Vector();
+
+					if (tv.getIsCleaningManager()) {
+
+						v.add(rs.getInt("man_id"));
+						v.add(rs.getString("cname"));
+						v.add(rs.getString("crew_id"));
+						v.add(rs.getString("csid"));
+						v.add("-");
+						v.add(rs.getObject("cs_stime"));
+						v.add(rs.getObject("cs_etime"));
+						dtm.addRow(v);
+					}
+
+					if (tv.getIsEntertainmentManager()) {
+						v.add(rs.getInt("man_id"));
+						v.add(rs.getString("cname"));
+						v.add(rs.getString("crew_id"));
+						v.add("-");
+						v.add(rs.getString("esid"));
+						v.add(rs.getObject("es_stime"));
+						v.add(rs.getObject("es_etime"));
+						dtm.addRow(v);
+					}
+				}
 			}
-		*/
-	
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	
 	private boolean mngAddSchOpen=false, mngUpdateSchOpen=false;

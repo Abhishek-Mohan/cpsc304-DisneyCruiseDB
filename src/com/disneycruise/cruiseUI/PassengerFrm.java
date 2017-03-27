@@ -1,5 +1,7 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
 
+
+import com.disneycruise.cruise.PassengerTableViews;
 
 import java.awt.EventQueue;
 
@@ -20,6 +22,7 @@ import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JDesktopPane;
+import java.sql.*;
 
 public class PassengerFrm extends JFrame {
 
@@ -154,21 +157,25 @@ public class PassengerFrm extends JFrame {
 	private void fillTable(Object o) {
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
-		/*
-		 * replace this commented block
-		 * with your query database code 
-		 * to get all passenger data from database as variable rs
-			
+
+		PassengerTableViews pv = new PassengerTableViews();
+		ResultSet rs = pv.getPassengerTableView();
+
+		try {
 			while (rs.next()) {
 				Vector v = new Vector();
-				v.add(rs.getInt("pid"));
+				v.add(rs.getString("pid"));
 				v.add(rs.getString("pname"));
-				v.add(rs.getString("age"));
-				...
+				v.add(rs.getInt("age"));
+				v.add(rs.getString("password"));
+				v.add(rs.getInt("cid"));
 				dtm.addRow(v);
 			}
-		*/
-	
+			rs.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+
+		}
 	}
 	
 	

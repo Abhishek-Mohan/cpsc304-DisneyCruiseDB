@@ -1,4 +1,7 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
+
+import com.disneycruise.cruise.CrewTableViews;
+import com.disneycruise.cruise.ManagerTableViews;
 
 import java.awt.EventQueue;
 
@@ -8,6 +11,8 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.util.Vector;
 
 public class CrewScheduleInterFrm extends JInternalFrame {
 	private JTable cleanSch_table;
@@ -37,7 +42,7 @@ public class CrewScheduleInterFrm extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CrewScheduleInterFrm(String crwid) {
+	public CrewScheduleInterFrm(String input, boolean isWorkPlaceQuery, boolean isCrewIDQuery) {
 		setMaximizable(true);
 		setTitle("Crew Schedule");
 		setBounds(10, 0, 693, 980);
@@ -114,47 +119,72 @@ public class CrewScheduleInterFrm extends JInternalFrame {
 		lblPassengerName.setBounds(30, 671, 399, 21);
 		getContentPane().add(lblPassengerName);
 		
-		this.fillCleanTable(new Object());
-		this.fillEntertainmentTable(new Object());
+		this.fillCleanTable(new Object(), input, isWorkPlaceQuery, isCrewIDQuery);
+		this.fillEntertainmentTable(new Object(), input, isWorkPlaceQuery, isCrewIDQuery);
 		this.fillPsgTable(new Object());
 	}
 	
-	private void fillCleanTable(Object o) {
+	private void fillCleanTable(Object o, String input, boolean isWorkPlaceQuery, boolean isCrewIDQuery) {
 		DefaultTableModel dtm = (DefaultTableModel) cleanSch_table.getModel();
 		dtm.setRowCount(0);
-		/*
-		 * replace this commented block
-		 * with your query database code 
-		 * to get cleanSchedule data by crewid from database as variable rs
-			
+
+		CrewTableViews ctv = new CrewTableViews();
+		ManagerTableViews mtv = new ManagerTableViews();
+
+		ResultSet rs = null;
+
+		if (isWorkPlaceQuery) {
+			rs = ctv.getCrewCleanScheduleByDepartment(input);
+		}
+		if (isCrewIDQuery) {
+			rs = ctv.getCrewCleanScheduleByCrewID(input);
+		}
+
+		try {
 			while (rs.next()) {
 				Vector v = new Vector();
-				v.add(rs.getString("crewName"));
+				v.add(rs.getString("cname"));
 				v.add(rs.getString("csid"));
-				...
+				v.add(rs.getObject("cs_stime"));
+				v.add(rs.getObject("cs_etime"));
+				v.add(rs.getString("man_id"));
+
 				dtm.addRow(v);
 			}
-		*/
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	
 	}
 	
-	private void fillEntertainmentTable(Object o) {
+	private void fillEntertainmentTable(Object o, String input, boolean isWorkPlaceQuery, boolean isCrewIDQuery) {
 		DefaultTableModel dtm = (DefaultTableModel) entertainmentSch_table.getModel();
 		dtm.setRowCount(0);
-		/*
-		 * replace this commented block
-		 * with your query database code 
-		 * to get entertainmentSchedule data by crewid from database as variable rs
-			
+
+		CrewTableViews ctv = new CrewTableViews();
+		ResultSet rs = null;
+		if (isWorkPlaceQuery) {
+			rs = ctv.getCrewEntertainmentScheduleByDepartment(input);
+		}
+		if (isCrewIDQuery) {
+			rs = ctv.getCrewEntertainmentScheduleByCrewID(input);
+		}
+
+		try {
 			while (rs.next()) {
 				Vector v = new Vector();
-				v.add(rs.getString("crewName"));
+				v.add(rs.getString("cname"));
 				v.add(rs.getString("esid"));
-				...
+				v.add(rs.getString("eid"));
+				v.add(rs.getObject("es_stime"));
+				v.add(rs.getObject("es_etime"));
+				v.add(rs.getString("man_id"));
+
 				dtm.addRow(v);
 			}
-		*/
-	
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	
 	private void fillPsgTable(Object o) {

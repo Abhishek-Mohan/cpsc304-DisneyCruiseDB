@@ -42,7 +42,7 @@ create table cabin
 grant select on cabin to public;
 
 create table manager
-	(man_id char(5) not null,
+	(man_id char(6) not null,
 	password char(6) not null,
 	mname varchar(20) not null,
 	department varchar(60) not null,
@@ -56,7 +56,7 @@ create table cleaningschedule
 	(csid char(8) not null,
 	cs_stime interval day(0) to second not null,
 	cs_etime interval day(0) to second not null,
-	man_id char(5) not null,
+	man_id char(6) not null,
 	primary key (csid),
 	foreign key (man_id) references manager);
 
@@ -65,8 +65,7 @@ grant select on cleaningschedule to public;
 create table entertainmentschedule 
 	(esid char(8) not null,
 	man_id char(5) not null,
-	primary key (esid),
-	foreign key (man_id) references manager);
+	primary key (esid));
 
 grant select on entertainmentschedule to public;
 
@@ -76,8 +75,8 @@ create table entertainmentschedulecontent
 	es_stime interval day(0) to second not null,
 	es_etime interval day(0) to second not null,
 	primary key (esid, eid),
-	foreign key (esid) references entertainmentschedule ON DELETE CASCADE,
-	foreign key (eid) references entertainment ON DELETE CASCADE);
+	foreign key (esid) references entertainmentschedule,
+	foreign key (eid) references entertainment);
 
 grant select on entertainmentschedulecontent to public;
 
@@ -89,15 +88,12 @@ create table crew
 	cid char(3) not null,
 	csid char(8) null,
 	esid char(8) null,
-	primary key (crew_id),
-	foreign key (cid) references cabin,
-	foreign key (csid) references cleaningschedule,
-	foreign key (esid) references entertainmentschedule);
+	primary key (crew_id));
 
 grant select on crew to public;
 
 create table managecrew
-	(man_id char(5) not null,
+	(man_id char(6) not null,
 	crew_id char(5) not null,
 	primary key (man_id, crew_id),
 	foreign key (man_id) references manager,
@@ -255,11 +251,6 @@ insert into cleaningschedule
 insert into cleaningschedule
 	values('710-3466', interval '0 10:00:00' day(0) to second, interval '0 14:30:00' day(0) to second, '30000');
 
-
-alter table cabin 
-	add foreign key (csid) references cleaningschedule (csid);
-
-
 insert into entertainmentschedule
 	values('230-8888', '40000');
 insert into entertainmentschedule
@@ -379,6 +370,9 @@ insert into passengerdining
 	values('ma244', '150-0104');
 insert into passengerdining
 	values('mc244', '150-0104');
+
+	alter table cabin
+    	add foreign key (csid) references cleaningschedule (csid);
 
 
 /*

@@ -1,6 +1,10 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
+
+import com.disneycruise.cruise.PassengerTableViews;
 
 import java.awt.EventQueue;
+import java.sql.*;
+import java.util.Vector;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
@@ -34,18 +38,18 @@ public class TotalNumScheduleOfEachPsg extends JInternalFrame {
 		setTitle("Total Number of Schedules of Each Passenger");
 		setBounds(100, 100, 557, 555);
 		getContentPane().setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(15, 15, 517, 484);
-	
-		
+
+
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"pid", "Passenger Name", "Total Number of Schedules"
-			}
+				new Object[][]{
+				},
+				new String[]{
+						"pid", "Passenger Name", "Total Number of Schedules"
+				}
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(165);
 		table.getColumnModel().getColumn(2).setPreferredWidth(255);
@@ -59,19 +63,20 @@ public class TotalNumScheduleOfEachPsg extends JInternalFrame {
 	private void fillTable(Object o) {
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
-		/*
-		 * replace this commented block
-		 * with your query database code 
-		 * to get total number of schedules of each passenger
-			
+
+		PassengerTableViews ptv = new PassengerTableViews();
+		ResultSet rs = ptv.getTotalNumberofSchedulesView();
+
+		try {
 			while (rs.next()) {
 				Vector v = new Vector();
-				v.add(rs.getInt("pid"));
-				v.add(rs.getString("name"));		
-				...
+				v.add(rs.getString("pid"));
+				v.add(rs.getString("pname"));
+				v.add(rs.getString("scheduleCount"));
 				dtm.addRow(v);
 			}
-		*/
-	
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 }

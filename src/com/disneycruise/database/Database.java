@@ -7,13 +7,13 @@ import java.sql.SQLException;
 /**
  * Created by abhis on 3/20/2017.
  */
-public class Database
-{
-    Connection connection;
+public class Database {
+	private static Database connectionClass;
+	private static java.sql.Connection connection;
 
     public Database()
     {
-
+		connectToDb("ora_z4n8", "a20232120");
     }
 
     //Connect to Database
@@ -39,4 +39,19 @@ public class Database
 		}
 	}
 
+
+	public static Database getInstance()
+	{
+		if ( connectionClass == null )
+		{
+			connectionClass = new Database();
+		}
+		return connectionClass;
+	}
+
+	public java.sql.Connection getConnection() {
+		return connection;
+	}
+
 }
+

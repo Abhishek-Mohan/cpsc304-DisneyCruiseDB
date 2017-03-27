@@ -1,10 +1,12 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
 
+import java.sql.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import com.disneycruise.cruise.*;
 
 public class ManagerFrm extends JFrame {
 
@@ -114,17 +117,17 @@ public class ManagerFrm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String crwid = crewid_textField.getText();
 				if(StringUtil.isEmpty(crwid)){
-					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty£¡");
+					JOptionPane.showMessageDialog(null, "crew_id CANNOT be emptyï¿½ï¿½");
 					return;
 				}
-				if(!crwSchOpen){
-					crwSchOpen=true;
-					crwSchIF= new CrewScheduleInterFrm(crwid);
-					crwSchIF.setVisible(true);
-					desktopPane.add(crwSchIF);
+				if(!mngSchOpen){
+					mngSchOpen=true;
+					mngSchIF= new ManagerScheduleInterFrm(crwid, false, true);
+					mngSchIF.setVisible(true);
+					desktopPane.add(mngSchIF);
 				}else{
-					crwSchOpen=false;					
-					crwSchIF.dispose();
+					mngSchOpen=false;
+					mngSchIF.dispose();
 					
 				}
 				/*
@@ -145,25 +148,25 @@ public class ManagerFrm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String manid = manid_textField.getText();
 				if(StringUtil.isEmpty(manid)){
-					JOptionPane.showMessageDialog(null, "man_id CANNOT be empty£¡");
+					JOptionPane.showMessageDialog(null, "man_id CANNOT be emptyï¿½ï¿½");
 					return;
 				}
 				if(!mngSchOpen){
 					mngSchOpen=true;
-					mngSchIF= new ManagerScheduleInterFrm(manid);
+					mngSchIF= new ManagerScheduleInterFrm(manid, true, false);
 					mngSchIF.setVisible(true);
 					desktopPane.add(mngSchIF);
 				}else{
 					mngSchOpen=false;					
 					mngSchIF.dispose();
-					
 				}
+
 				/*
 				 * replace this commented block
 				 * with your query database code 
 				 * to search crew's schedules by crew_id from database
 				 * crewid info. is in variable crewid_textField		
-				 */				
+				 */
 			}
 		});
 		contentPane.add(desktopPane);
@@ -177,16 +180,24 @@ public class ManagerFrm extends JFrame {
 		 * replace this commented block
 		 * with your query database code 
 		 * to get all manager's data from database as variable rs
-			
-			while (rs.next()) {
-				Vector v = new Vector();
-				v.add(rs.getString("man_id"));
-				v.add(rs.getString("mname"));			
-				...
-				dtm.addRow(v);
-			}
-		*/
-	
+			*/
+		ManagerTableViews tv = new ManagerTableViews();
+		 ResultSet rs = tv.getManagerTableView();
+
+		 try {
+			 while (rs.next()) {
+				 Vector v = new Vector();
+				 v.add(rs.getInt("man_id"));
+				 v.add(rs.getString("mname"));
+				v.add(rs.getString("department"));
+				v.add(rs.getInt("cid"));
+				 dtm.addRow(v);
+			 }
+			 rs.close();
+		 } catch (SQLException se) {
+		 	se.printStackTrace();
+
+		 }
 	}
 	
 	private boolean crwSchOpen=false, mngSchOpen=false;

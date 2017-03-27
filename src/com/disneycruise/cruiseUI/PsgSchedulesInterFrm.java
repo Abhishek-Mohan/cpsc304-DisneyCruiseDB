@@ -1,4 +1,6 @@
-//package dsn;
+package com.disneycruise.cruiseUI;
+
+import com.disneycruise.cruise.PassengerTableViews;
 
 import java.awt.EventQueue;
 
@@ -8,6 +10,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.Vector;
 
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -109,14 +113,14 @@ public class PsgSchedulesInterFrm extends JInternalFrame {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String pid = pidSearch_textField.getText();
 				/* replace this commented block
 				 * with your query database code 
 				 * to find all schedules of specific pid which in variable pidSearch_textField
 				 */				
 				
-				//fillPsgTable(new Object());
-				//fillRoommateTable(new Object());
+				fillPsgTable(new Object());
+				fillRoommateTable(new Object(), pid);
 			}
 		});
 		btnSearch.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -166,6 +170,7 @@ public class PsgSchedulesInterFrm extends JInternalFrame {
 					JOptionPane.showMessageDialog(null, "sid cannot be null!");
 					return;
 				}
+
 				/* replace this commented block
 				 * with your query database code 
 				 * to remove a schedule by sid which in variable rmSchedule_textField
@@ -179,41 +184,54 @@ public class PsgSchedulesInterFrm extends JInternalFrame {
 	private void fillPsgTable(Object o) {
 		DefaultTableModel dtm = (DefaultTableModel) ps_table.getModel();
 		dtm.setRowCount(0);
-		/*
-		 * replace this commented block
-		 * with your query database code 
-		 * to get all passenger data from database as variable rs
-			
-			while (rs.next()) {
-				Vector v = new Vector();
-				v.add(rs.getInt("sid"));
-				v.add(rs.getString("pid"));
-				v.add(rs.getString("eid"));
-				...
-				dtm.addRow(v);
+		String pid = pidSearch_textField.getText();
+
+		PassengerTableViews ptv = new PassengerTableViews();
+		ResultSet rs = ptv.getPassengerScheduleView(pid);
+			try {
+
+				while (rs.next()) {
+					Vector v = new Vector();
+					v.add(rs.getString("sid"));
+					v.add(rs.getString("pid"));
+					v.add(rs.getString("eid"));
+					v.add(rs.getString("ename"));
+					v.add(rs.getString("eloc"));
+					v.add(rs.getObject("sstime"));
+					v.add(rs.getObject("setime"));
+					dtm.addRow(v);
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
 			}
-		*/
-	
 	}
 	
-	private void fillRoommateTable(Object o) {
+	private void fillRoommateTable(Object o, String roomMate) {
 		DefaultTableModel dtm = (DefaultTableModel) rm_table.getModel();
 		dtm.setRowCount(0);
 		/*
 		 * replace this commented block
 		 * with your query database code 
 		 * to get all passenger data from database as variable rs
-			
+		*/
+		PassengerTableViews ptv = new PassengerTableViews();
+		ResultSet rs = ptv.getRoommateScheduleView(roomMate);
+		try {
+
 			while (rs.next()) {
 				Vector v = new Vector();
-				v.add(rs.getInt("sid"));
+				v.add(rs.getString("sid"));
 				v.add(rs.getString("pid"));
 				v.add(rs.getString("eid"));
-				...
+				v.add(rs.getString("ename"));
+				v.add(rs.getString("eloc"));
+				v.add(rs.getObject("sstime"));
+				v.add(rs.getObject("setime"));
 				dtm.addRow(v);
 			}
-		*/
-	
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 	
 	private boolean createSchOpen=false;
