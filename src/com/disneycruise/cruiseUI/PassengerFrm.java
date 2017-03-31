@@ -69,7 +69,7 @@ public class PassengerFrm extends JFrame {
 		
 		table = new JTable();
 		table.setShowVerticalLines(false);
-		table.setFont(new Font("Arial", Font.PLAIN, 23));
+		table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		table.setModel(new DefaultTableModel(				
 			new Object[][] {		
 			},

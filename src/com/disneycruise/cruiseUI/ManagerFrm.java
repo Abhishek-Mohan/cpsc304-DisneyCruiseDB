@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 import javax.swing.table.DefaultTableModel;
 import com.disneycruise.cruise.*;
 
@@ -29,6 +30,13 @@ public class ManagerFrm extends JFrame {
 	private JLabel lblFindScheduleBy;
 	private JTextField crewid_textField;
 	private JTextField manid_textField;
+	private boolean createMaxEmployeePerDeptOpen=false;
+	private MaxNumEmployeePerDeptFrm maxNumOfEmplPerDept;
+	private boolean createMinNumOpen=false;
+	private MinNumOfCrewPerMngFrm minNumOfCrewPerMng;
+	private boolean crwSchOpen=false, mngSchOpen=false;
+	private CrewScheduleInterFrm crwSchIF;
+	private ManagerScheduleInterFrm mngSchIF;
 
 	/**
 	 * Launch the application.
@@ -74,7 +82,7 @@ public class ManagerFrm extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
 		table.getColumnModel().getColumn(1).setPreferredWidth(135);
 		table.getColumnModel().getColumn(2).setPreferredWidth(105);
-		table.setFont(new Font("Arial", Font.PLAIN, 18));
+		table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		table.setBounds(738, 184, 120, 86);
 		scrollPane.setViewportView(table);
 		contentPane.add(scrollPane);
@@ -117,7 +125,7 @@ public class ManagerFrm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String crwid = crewid_textField.getText();
 				if(StringUtil.isEmpty(crwid)){
-					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty��");
+					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty!");
 					return;
 				}
 				if(!mngSchOpen){
@@ -148,7 +156,7 @@ public class ManagerFrm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String manid = manid_textField.getText();
 				if(StringUtil.isEmpty(manid)){
-					JOptionPane.showMessageDialog(null, "man_id CANNOT be empty��");
+					JOptionPane.showMessageDialog(null, "man_id CANNOT be empty");
 					return;
 				}
 				if(!mngSchOpen){
@@ -170,6 +178,47 @@ public class ManagerFrm extends JFrame {
 			}
 		});
 		contentPane.add(desktopPane);
+		
+		JButton btnNewButton = new JButton("<html><font color=black>Find minimum number </font> <br> <font color=black>of crew per manager</font></html>");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!createMinNumOpen){
+					createMinNumOpen=true;
+					minNumOfCrewPerMng= new MinNumOfCrewPerMngFrm();
+					minNumOfCrewPerMng.setVisible(true);
+					minNumOfCrewPerMng.setLocationRelativeTo(null);
+					
+				}else{
+					createMinNumOpen=false;					
+					minNumOfCrewPerMng.dispose();
+					
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 18));
+		btnNewButton.setBounds(709, 440, 215, 63);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("<html><font color=black>Find the max number</font><br><font color=black> of employees per</font><br><font color=black> department</font></html>");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!createMaxEmployeePerDeptOpen){
+					createMaxEmployeePerDeptOpen=true;
+					maxNumOfEmplPerDept= new MaxNumEmployeePerDeptFrm();
+					maxNumOfEmplPerDept.setVisible(true);
+					maxNumOfEmplPerDept.setLocationRelativeTo(null);
+					
+				}else{
+					createMaxEmployeePerDeptOpen=false;					
+					maxNumOfEmplPerDept.dispose();
+					
+				}
+			}
+		});
+		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 18));
+		
+		btnNewButton_1.setBounds(709, 560, 215, 81);
+		contentPane.add(btnNewButton_1);
 		this.fillTable(new Object());
 	}
 	
@@ -199,8 +248,5 @@ public class ManagerFrm extends JFrame {
 
 		 }
 	}
-	
-	private boolean crwSchOpen=false, mngSchOpen=false;
-	private CrewScheduleInterFrm crwSchIF;
-	private ManagerScheduleInterFrm mngSchIF;
+
 }

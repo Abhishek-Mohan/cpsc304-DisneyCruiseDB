@@ -5,6 +5,7 @@ import com.disneycruise.cruise.ManagerTableViews;
 
 import java.awt.EventQueue;
 
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.Vector;
 
-public class CrewScheduleInterFrm extends JInternalFrame {
+public class CrewScheduleInterFrm extends JFrame {
 	private JTable cleanSch_table;
 	private JTable entertainmentSch_table;
 	private JTable passengerName_table;
@@ -43,7 +44,7 @@ public class CrewScheduleInterFrm extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CrewScheduleInterFrm(String input, boolean isWorkPlaceQuery, boolean isCrewIDQuery) {
-		setMaximizable(true);
+//		setMaximizable(true);
 		setTitle("Crew Schedule");
 		setBounds(10, 0, 693, 980);
 		getContentPane().setLayout(null);
@@ -64,7 +65,7 @@ public class CrewScheduleInterFrm extends JInternalFrame {
 		cleanSch_table.getColumnModel().getColumn(2).setPreferredWidth(95);
 		cleanSch_table.getColumnModel().getColumn(3).setPreferredWidth(95);
 		cleanSch_table.getColumnModel().getColumn(4).setPreferredWidth(85);
-		cleanSch_table.setFont(new Font("Arial", Font.PLAIN, 18));
+		cleanSch_table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		cleanSch_table.setBounds(77, 500, 114, 29);
 		scrollPane.setViewportView(cleanSch_table);
 		getContentPane().add(scrollPane);
@@ -85,7 +86,7 @@ public class CrewScheduleInterFrm extends JInternalFrame {
 		entertainmentSch_table.getColumnModel().getColumn(0).setPreferredWidth(115);
 		entertainmentSch_table.getColumnModel().getColumn(3).setPreferredWidth(95);
 		entertainmentSch_table.getColumnModel().getColumn(4).setPreferredWidth(95);
-		entertainmentSch_table.setFont(new Font("Arial", Font.PLAIN, 18));
+		entertainmentSch_table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		entertainmentSch_table.setBounds(52, 116, 161, 21);
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(15, 364, 647, 265);
@@ -102,7 +103,7 @@ public class CrewScheduleInterFrm extends JInternalFrame {
 			}
 		));
 		passengerName_table.getColumnModel().getColumn(0).setPreferredWidth(165);
-		passengerName_table.setFont(new Font("Arial", Font.PLAIN, 18));
+		passengerName_table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		passengerName_table.setBounds(752, 387, 16, 21);		
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(15, 695, 647, 229);

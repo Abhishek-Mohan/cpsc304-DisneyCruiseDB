@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,7 @@ import com.disneycruise.cruise.*;
 import java.sql.*;
 import java.util.Vector;
 
-public class ManagerScheduleInterFrm extends JInternalFrame {
+public class ManagerScheduleInterFrm extends JFrame {
 	private JTable managerSch_table;
 	private JTable managedCrewSch_table;
 	private JTextField esidcsidSchRm_textField;

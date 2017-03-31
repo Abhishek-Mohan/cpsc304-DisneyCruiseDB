@@ -93,6 +93,7 @@ public class AddPsgScheduleFrm extends JFrame {
 		contentPane.add(lblSetime);
 		
 		sid_textField = new JTextField();
+		sid_textField.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		sid_textField.setBounds(96, 55, 327, 27);
 		contentPane.add(sid_textField);
 		sid_textField.setColumns(10);
