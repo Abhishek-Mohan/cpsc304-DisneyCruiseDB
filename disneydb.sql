@@ -345,6 +345,10 @@ insert into dining
 	values('150-0104', 1, to_date('2017-06-10 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-10 17:30:00', 'YYYY-MM-DD HH24:MI:SS'), '150-6666');
 insert into dining
 	values('133-0156', 1, to_date('2017-06-15 17:30:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-15 18:30:00', 'YYYY-MM-DD HH24:MI:SS'), '133-3260');
+insert into dining
+  values('131-0034', 1, to_date('2017-06-11 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-11 17:30:00', 'YYYY-MM-DD HH24:MI:SS'), '133-3260');
+insert into dining
+  values('150-0125', 1, to_date('2017-06-07 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-07 13:00:00', 'YYYY-MM-DD HH24:MI:SS'), '150-6666');
 
 insert into menu
 	values('b0', 'brunch', 'Vegetarian Brunch');
@@ -370,6 +374,10 @@ insert into passengerdining
 	values('ma244', '150-0104');
 insert into passengerdining
 	values('mc244', '150-0104');
+insert into passengerdining
+  values('ua301', '131-0034');
+insert into passengerdining
+  values('mb244', '150-0125');
 
 	alter table cabin
     	add foreign key (csid) references cleaningschedule (csid);
