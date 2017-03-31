@@ -96,6 +96,8 @@ public class ManagerTableViews {
         return rs3;
     }
 
+    public
+
     public ResultSet getManagerCrewScheduleByManID(String man_id) {
         isEntertainmentManager = false;
         isCleaningManager = false;

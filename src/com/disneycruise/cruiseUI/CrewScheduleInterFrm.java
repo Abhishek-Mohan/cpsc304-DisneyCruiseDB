@@ -194,15 +194,16 @@ public class CrewScheduleInterFrm extends JInternalFrame {
 		 * replace this commented block
 		 * with your query database code 
 		 * to get passenger name if the crewid work in cabin from database as variable rs
-			
+			*/
+
+
 			while (rs.next()) {
 				Vector v = new Vector();
 				v.add(rs.getString("passengerName"));
 				v.add(rs.getString("cid"));			
-				...
 				dtm.addRow(v);
 			}
-		*/
+
 	
 	}
 
