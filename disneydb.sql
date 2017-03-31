@@ -1,23 +1,23 @@
-drop table passenger cascade constraint;
-drop table cabin cascade constraint;
-drop table passengerdining cascade constraint;
-drop table manager cascade constraint;
-drop table crew cascade constraint;
-drop table managecrew cascade constraint;
-drop table cleaningschedule cascade constraint;
-drop table entertainmentschedule cascade constraint;
-drop table entertainmentschedulecontent cascade constraint;
-drop table entertainment cascade constraint;
-drop table tour cascade constraint;
-drop table stop cascade constraint;
-drop table show cascade constraint;
-drop table fitnesscentre cascade constraint;
-drop table restaurant cascade constraint;
-drop table dining cascade constraint;
-drop table menu cascade constraint;
-drop table diningmenu cascade constraint;
-drop table schedule cascade constraint;
-drop table schedulecontent cascade constraint;
+drop table passenger cascade CONSTRAINTS;
+drop table cabin cascade CONSTRAINTS;
+drop table passengerdining cascade CONSTRAINTS;
+drop table manager cascade CONSTRAINTS;
+drop table crew cascade CONSTRAINTS;
+drop table managecrew cascade CONSTRAINTS;
+drop table cleaningschedule cascade CONSTRAINTS;
+drop table entertainmentschedule cascade CONSTRAINTS;
+drop table entertainmentschedulecontent cascade CONSTRAINTS;
+drop table entertainment cascade CONSTRAINTS;
+drop table tour cascade CONSTRAINTS;
+drop table stop cascade CONSTRAINTS;
+drop table show cascade CONSTRAINTS;
+drop table fitnesscentre cascade CONSTRAINTS;
+drop table restaurant cascade CONSTRAINTS;
+drop table dining cascade CONSTRAINTS;
+drop table menu cascade CONSTRAINTS;
+drop table diningmenu cascade CONSTRAINTS;
+drop table schedule cascade CONSTRAINTS;
+drop table schedulecontent cascade CONSTRAINTS;
 
 
 create table entertainment
@@ -227,6 +227,10 @@ insert into entertainment
 	values('500-6541', null, interval '0 09:00:00' day(0) to second, interval '0 00:30:00' day(0) to second, 'Main Deck', 'Big Waves');
 insert into entertainment
 	values('500-7850', null, interval '0 07:30:00' day(0) to second, interval '0 11:00:00' day(0) to second, 'Upper Deck', 'Total Eclipse');
+insert into entertainment
+	values('300-0613', '2017-06-13', interval '0 19:30:00' day(0) to second, interval '0 20:00:00' day(0) to second, 'Main Deck', 'The Golden Mickeys');
+insert into entertainment
+	values('300-0614', '2017-06-14', interval '0 19:00:00' day(0) to second, interval '0 20:00:00' day(0) to second, 'Main Deck', 'An Unforgettable Journey');
 
 insert into cabin
 	values('003', 'crew', 'Deck 0', 4, null);
@@ -263,6 +267,12 @@ insert into entertainmentschedule
 	values('230-5555', '40000');
 insert into entertainmentschedule
 	values('310-2333', '50000');
+insert into entertainmentschedule
+	values('720-6854', '70000');
+insert into entertainmentschedule
+	values('710-2311', '70000');
+insert into entertainmentschedule
+	values('310-2300', '50000');
 
 insert into entertainmentschedulecontent
 	values('230-8888', '150-6666', interval '0 08:00:00' day(0) to second, interval '0 11:30:00' day(0) to second);
@@ -274,6 +284,14 @@ insert into entertainmentschedulecontent
 	values('230-5555', '133-3260', interval '0 18:00:00' day(0) to second, interval '0 20:00:00' day(0) to second);
 insert into entertainmentschedulecontent
 	values('310-2333', '300-7777', interval '0 18:00:00' day(0) to second, interval '0 20:00:00' day(0) to second);
+insert into entertainmentschedulecontent
+	values('720-6854', '500-7850', interval '0 10:30:00' day(0) to second, interval '0 16:30:00' day(0) to second);
+insert into entertainmentschedulecontent
+	values('710-2311', '500-6541', interval '0 17:00:00' day(0) to second, interval '0 00:40:00' day(0) to second);
+insert into entertainmentschedulecontent
+	values('310-2300', '300-0614', interval '0 18:30:00' day(0) to second, interval '0 20:00:00' day(0) to second);
+insert into entertainmentschedulecontent
+	values('310-2333', '300-0614', interval '0 18:30:00' day(0) to second, interval '0 20:00:00' day(0) to second);
 
 insert into crew
 	values('40069', 'palace', 'Tiana', 'food', '007', null, '230-8888');
@@ -286,15 +304,15 @@ insert into crew
 insert into crew
 	values('50065', 'oceano', 'Ariel', 'show', '007', null, '310-2333');
 insert into crew
-  values('50166', 'woooof', 'Goofy', 'show', '007', null, null);
+  values('50166', 'woooof', 'Goofy', 'show', '007', null, '310-2300');
 insert into crew
   values('60088', 'ppappa', 'Snow', 'show', '003', null, null);
 insert into crew
-  values('70143', '563hue', 'Pete', 'gym', '010', null, null);
+  values('70143', '563hue', 'Pete', 'gym', '010', null, '720-6854');
 insert into crew
   values('32567', 'chichi', 'Chip', 'cabin', '007', null, null);
 insert into crew
-  values('81123', '94h670', 'Nemo', 'pool', '007', null, null);
+  values('81123', '94h670', 'Nemo', 'pool', '007', null, '710-2311');
 
 insert into managecrew
 	values('50000', '50065');
@@ -334,6 +352,8 @@ insert into schedule
 	values('244-3001', 'mc244');
 insert into schedule
 	values('244-1002', 'ma244');
+insert into schedule
+	values('301-2030', 'ub301');
 
 insert into schedulecontent
 	values('301-1001', '500-6541', to_date('2017-06-12 13:00:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-12 15:00:00', 'YYYY-MM-DD HH24:MI:SS'));
@@ -343,6 +363,10 @@ insert into schedulecontent
 	values('244-1002', '300-7777', to_date('2017-06-10 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-10 20:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 insert into schedulecontent
 	values('244-1002', '500-7850', to_date('2017-06-11 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-11 11:00;00', 'YYYY-MM-DD HH24:MI:SS'));
+insert into schedulecontent
+	values('301-1001', '300-0613', to_date('2017-06-13 19:30:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-13 20:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+insert into schedulecontent
+	values('301-2030', '300-0613', to_date('2017-06-13 19:30:00', 'YYYY-MM-DD HH24:MI:SS'), to_date('2017-06-13 20:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 insert into stop
 	values('San Juan, Puerto Rico');
@@ -354,6 +378,10 @@ insert into tour
 
 insert into show
 	values('300-7777');
+insert into show
+	values('300-0613');
+insert into show
+	values('300-0614');
 
 insert into fitnesscentre
 	values('500-6541', 'pool');
@@ -405,8 +433,8 @@ insert into passengerdining
 insert into passengerdining
   values('mb244', '150-0125');
 
-	alter table cabin
-    	add foreign key (csid) references cleaningschedule (csid);
+alter table cabin
+  add foreign key (csid) references cleaningschedule (csid);
 
 
 /*
