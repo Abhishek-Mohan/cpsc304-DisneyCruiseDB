@@ -1,23 +1,23 @@
-drop table passenger cascade constraint;
-drop table cabin cascade constraint;
-drop table passengerdining cascade constraint;
-drop table manager cascade constraint;
-drop table crew cascade constraint;
-drop table managecrew cascade constraint;
-drop table cleaningschedule cascade constraint;
-drop table entertainmentschedule cascade constraint;
-drop table entertainmentschedulecontent cascade constraint;
-drop table entertainment cascade constraint;
-drop table tour cascade constraint;
-drop table stop cascade constraint;
-drop table show cascade constraint;
-drop table fitnesscentre cascade constraint;
-drop table restaurant cascade constraint;
-drop table dining cascade constraint;
-drop table menu cascade constraint;
-drop table diningmenu cascade constraint;
-drop table schedule cascade constraint;
-drop table schedulecontent cascade constraint;
+drop table passenger cascade CONSTRAINTS;
+drop table cabin cascade CONSTRAINTS;
+drop table passengerdining cascade CONSTRAINTS;
+drop table manager cascade CONSTRAINTS;
+drop table crew cascade CONSTRAINTS;
+drop table managecrew cascade CONSTRAINTS;
+drop table cleaningschedule cascade CONSTRAINTS;
+drop table entertainmentschedule cascade CONSTRAINTS;
+drop table entertainmentschedulecontent cascade CONSTRAINTS;
+drop table entertainment cascade CONSTRAINTS;
+drop table tour cascade CONSTRAINTS;
+drop table stop cascade CONSTRAINTS;
+drop table show cascade CONSTRAINTS;
+drop table fitnesscentre cascade CONSTRAINTS;
+drop table restaurant cascade CONSTRAINTS;
+drop table dining cascade CONSTRAINTS;
+drop table menu cascade CONSTRAINTS;
+drop table diningmenu cascade CONSTRAINTS;
+drop table schedule cascade CONSTRAINTS;
+drop table schedulecontent cascade CONSTRAINTS;
 
 
 create table entertainment
