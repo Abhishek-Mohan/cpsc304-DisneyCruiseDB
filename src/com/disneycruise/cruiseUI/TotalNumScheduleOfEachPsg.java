@@ -6,13 +6,14 @@ import java.awt.EventQueue;
 import java.sql.*;
 import java.util.Vector;
 
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 
-public class TotalNumScheduleOfEachPsg extends JInternalFrame {
+public class TotalNumScheduleOfEachPsg extends JFrame {
 	private JTable table;
 
 	/**
@@ -53,7 +54,7 @@ public class TotalNumScheduleOfEachPsg extends JInternalFrame {
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(165);
 		table.getColumnModel().getColumn(2).setPreferredWidth(255);
-		table.setFont(new Font("Arial", Font.PLAIN, 18));
+		table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		table.setBounds(565, 96, 33, 52);
 		scrollPane.setViewportView(table);
 		getContentPane().add(scrollPane);

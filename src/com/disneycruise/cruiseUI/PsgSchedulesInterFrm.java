@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class PsgSchedulesInterFrm extends JInternalFrame {
+public class PsgSchedulesInterFrm extends JFrame {
 	private JTable ps_table;
 	private JTable rm_table;
 	private JTextField pidSearch_textField;
@@ -46,7 +46,7 @@ public class PsgSchedulesInterFrm extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public PsgSchedulesInterFrm() {
-		setMaximizable(true);
+//		setMaximizable(true);
 		setTitle("Passenger Schedules");
 		setBounds(10, 10, 900, 907);
 		getContentPane().setLayout(null);

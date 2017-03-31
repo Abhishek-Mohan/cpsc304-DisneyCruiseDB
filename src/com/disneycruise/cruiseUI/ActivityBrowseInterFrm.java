@@ -12,13 +12,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class ActivityBrowseInterFrm extends JInternalFrame {
+public class ActivityBrowseInterFrm extends JFrame {
 	private JTable act_table;
 	private JTextField type_textField;
 	private JTextField date_textField;
@@ -46,7 +48,7 @@ public class ActivityBrowseInterFrm extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ActivityBrowseInterFrm() {
-		setMaximizable(true);
+		
 		setTitle("Activity Browser");
 		setBounds(10, 10, 903, 930);
 		getContentPane().setLayout(null);
@@ -64,7 +66,7 @@ public class ActivityBrowseInterFrm extends JInternalFrame {
 			}
 		));
 		act_table.getColumnModel().getColumn(3).setPreferredWidth(105);
-		act_table.setFont(new Font("Arial", Font.PLAIN, 18));
+		act_table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		act_table.setBounds(697, 164, 34, 179);
 		scrollPane.setViewportView(act_table);
 		getContentPane().add(scrollPane);

@@ -77,7 +77,7 @@ public class CrewFrm extends JFrame {
 		));
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
 		table.getColumnModel().getColumn(2).setPreferredWidth(105);
-		table.setFont(new Font("Arial", Font.PLAIN, 18));
+		table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		table.setBounds(738, 184, 120, 86);
 		scrollPane.setViewportView(table);
 		contentPane.add(scrollPane);

@@ -1,23 +1,23 @@
-drop table passenger cascade constraint;
-drop table cabin cascade constraint;
-drop table passengerdining cascade constraint;
-drop table manager cascade constraint;
-drop table crew cascade constraint;
-drop table managecrew cascade constraint;
-drop table cleaningschedule cascade constraint;
-drop table entertainmentschedule cascade constraint;
-drop table entertainmentschedulecontent cascade constraint;
-drop table entertainment cascade constraint;
-drop table tour cascade constraint;
-drop table stop cascade constraint;
-drop table show cascade constraint;
-drop table fitnesscentre cascade constraint;
-drop table restaurant cascade constraint;
-drop table dining cascade constraint;
-drop table menu cascade constraint;
-drop table diningmenu cascade constraint;
-drop table schedule cascade constraint;
-drop table schedulecontent cascade constraint;
+drop table passenger cascade CONSTRAINTS;
+drop table cabin cascade CONSTRAINTS;
+drop table passengerdining cascade CONSTRAINTS;
+drop table manager cascade CONSTRAINTS;
+drop table crew cascade CONSTRAINTS;
+drop table managecrew cascade CONSTRAINTS;
+drop table cleaningschedule cascade CONSTRAINTS;
+drop table entertainmentschedule cascade CONSTRAINTS;
+drop table entertainmentschedulecontent cascade CONSTRAINTS;
+drop table entertainment cascade CONSTRAINTS;
+drop table tour cascade CONSTRAINTS;
+drop table stop cascade CONSTRAINTS;
+drop table show cascade CONSTRAINTS;
+drop table fitnesscentre cascade CONSTRAINTS;
+drop table restaurant cascade CONSTRAINTS;
+drop table dining cascade CONSTRAINTS;
+drop table menu cascade CONSTRAINTS;
+drop table diningmenu cascade CONSTRAINTS;
+drop table schedule cascade CONSTRAINTS;
+drop table schedulecontent cascade CONSTRAINTS;
 
 
 create table entertainment
@@ -245,6 +245,12 @@ insert into manager
 	values('30000', 'gokee8', 'Samir', 'cabin', '010');
 insert into manager
 	values('40000', 'njekrn', 'Yiyun', 'food', '003');
+insert into manager
+  values('60000', 'hjdwjk', 'James', 'shop', '010');
+insert into manager
+  values('70000', 'boohoo', 'Boo', 'gym', '010');
+insert into manager
+  values('80000', '35g644', 'Cleo', 'pool', '003');
 
 insert into cleaningschedule
 	values('710-4555', interval '0 10:25:00' day(0) to second, interval '0 15:30:00' day(0) to second, '30000');
@@ -270,15 +276,25 @@ insert into entertainmentschedulecontent
 	values('310-2333', '300-7777', interval '0 18:00:00' day(0) to second, interval '0 20:00:00' day(0) to second);
 
 insert into crew
-	values('40069', 'palace', 'Tiana', 'kitchen', '007', null, '230-8888');
+	values('40069', 'palace', 'Tiana', 'food', '007', null, '230-8888');
 insert into crew
 	values('31105', '3g89he', 'Abhi', 'cabin', '010', '710-3466', null);
 insert into crew 
-	values('42396', 'dhuike', 'Simon', 'waiter', '010', null, '230-5555');
+	values('42396', 'dhuike', 'Simon', 'food', '010', null, '230-5555');
 insert into crew
 	values('32877', 'cincin', 'Cinderella', 'cabin', '007', '710-4555', null);
 insert into crew
-	values('50065', 'oceano', 'Ariel', 'dancer', '007', null, '310-2333');
+	values('50065', 'oceano', 'Ariel', 'show', '007', null, '310-2333');
+insert into crew
+  values('50166', 'woooof', 'Goofy', 'show', '007', null, null);
+insert into crew
+  values('60088', 'ppappa', 'Snow', 'show', '003', null, null);
+insert into crew
+  values('70143', '563hue', 'Pete', 'gym', '010', null, null);
+insert into crew
+  values('32567', 'chichi', 'Chip', 'cabin', '007', null, null);
+insert into crew
+  values('81123', '94h670', 'Nemo', 'pool', '007', null, null);
 
 insert into managecrew
 	values('50000', '50065');
@@ -290,6 +306,16 @@ insert into managecrew
 	values('30000', '31105');
 insert into managecrew
 	values('30000', '32877');
+insert into managecrew
+  values('50000', '50166');
+insert into managecrew
+  values('60000', '60088');
+insert into managecrew
+  values('70000', '70143');
+insert into managecrew
+  values('30000', '32567');
+insert into managecrew
+  values('80000', '81123');
 
 insert into passenger
 	values('ua301', 'Micky', 19, 'notche', '301');
