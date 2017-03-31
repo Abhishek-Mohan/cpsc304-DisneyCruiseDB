@@ -141,4 +141,58 @@ public class CrewTableViews {
         return rs;
     }
 
+    public ResultSet getCrewPassengerTableByCrewID(String crew_id) {
+        ResultSet rs = null;
+        String query;
+
+        if (crew_id.isEmpty()) {
+
+            query = "select * " +
+                    "from passenger P, crew C, cabin CA, cleaningschedule CS " +
+                    "where P.cid = CA.cid AND CA.csid = CS.csid AND C.csid = CS.csid ";
+
+        } else {
+            query = "select C.cname, P.cid " +
+                    "from passenger P, crew C, cabin CA, cleaningschedule CS " +
+                    "where P.cid = CA.cid AND CA.csid = CS.csid AND C.csid = CS.csid AND C.crew_id = '" + crew_id + "' ";
+        }
+
+        System.out.println(query);
+        try {
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet getCrewPassengerTableByDepartment(String workPlace) {
+        ResultSet rs = null;
+        String query;
+
+        if (workPlace.isEmpty()) {
+
+            query = "select * " +
+                    "from passenger P, crew C, cabin CA, cleaningschedule CS " +
+                    "where P.cid = CA.cid AND CA.csid = CS.csid AND C.csid = CS.csid ";
+
+        } else {
+            query = "select C.cname, P.cid " +
+                    "from passenger P, crew C, cabin CA, cleaningschedule CS " +
+                    "where P.cid = CA.cid AND CA.csid = CS.csid AND C.csid = CS.csid AND C.department = '" + workPlace + "' ";
+        }
+
+        System.out.println(query);
+        try {
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return rs;
+    }
+
 }

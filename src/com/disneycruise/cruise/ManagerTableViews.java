@@ -265,30 +265,27 @@ public class ManagerTableViews {
 
         if (!csid.isEmpty()) {
             isCleaningSchedule = true;
-            query = "UPDATE cleaningschedule " + " SET csid = ?, cs_stime = ? , cs_etime = ? , man_id = ? ";
+            query = "UPDATE cleaningschedule " + " SET cs_stime = ? , cs_etime = ? " +
+                    "where csid = '" + csid  + "' AND man_id = '" + man_id + "' ";
         }
-        System.out.println(query);
         if (!esid.isEmpty()) {
             isEntertainmentSchedule = true;
-            query = "UPDATE entertainmentschedulecontent " + "SET esid = ?, es_stime = ?, es_etime = ?  ";
+            query = "UPDATE entertainmentschedulecontent " + "SET es_stime = ? , es_etime = ? " +
+                    "where esid = '" + esid + "' AND eid = '" + eid + "' ";
 
         }
         System.out.println(query);
         try {
             PreparedStatement stmt =  conn.prepareStatement(query);
             if (isCleaningSchedule) {
-                stmt.setString(1, csid);
-                stmt.setObject(2, startTime);
-                stmt.setObject(3, endTime);
-                stmt.setString(4, man_id);
+                stmt.setObject(1, startTime);
+                stmt.setObject(2, endTime);
                 stmt.executeUpdate();
             }
             if (isEntertainmentSchedule) {
-              //  stmt.setString(1, esid);
-             //   stmt.setString(2, eid);
-                stmt.setObject(1, esid);
-                stmt.setObject(2, startTime);
-                stmt.setObject(3, endTime);
+
+                stmt.setObject(1, startTime);
+                stmt.setObject(2, endTime);
 
                 stmt.executeUpdate();
             }
@@ -297,20 +294,102 @@ public class ManagerTableViews {
         }
    }
 
-    public boolean getIsEntertainmentManager() {
-        return isEntertainmentManager;
-    }
+   public void removeCrewMembersSchedule(String schID) {
+       isEntertainmentManager = false;
+       isCleaningManager = false;
+       ResultSet rs1;
+       ResultSet rs2;
+       ResultSet rs3 = null;
+       Statement s1;
 
+       String query1 = "SELECT * " +
+               "FROM entertainmentschedule " +
+               "WHERE esid = '" + schID + "' ";
+
+       System.out.println(query1);
+
+       String query2 = "SELECT * " +
+               "FROM cleaningschedule " +
+               "WHERE csid = '" + schID + "' ";
+       try {
+           s1 = conn.createStatement();
+           rs1 = s1.executeQuery(query1);
+           if (rs1.next()) {
+               isEntertainmentManager = true;
+           }
+
+           Statement s2 = conn.createStatement();
+           rs2 = s2.executeQuery(query2);
+           if (rs2.next()) {
+               isCleaningManager = true;
+           }
+
+       } catch (SQLException se) {
+           se.printStackTrace();
+       }
+       String query = null;
+       if (isEntertainmentManager) {
+           query = "delete from entertainments chedulecontent where esid = '" + schID + "' ";
+       }
+       if (isCleaningManager) {
+           query = "delete from cleaningschedule where csid = '" + schID + "' ";
+       }
+       System.out.println(query);
+
+       try {
+           Statement stmt = conn.createStatement();
+           if (isCleaningManager != false || isEntertainmentManager != false) {
+               stmt.executeUpdate(query);
+           }
+
+       } catch (SQLException se) {
+           se.printStackTrace();
+       }
+   }
     public boolean getIsCleaningManager() {
         return isCleaningManager;
     }
 
-    public void closeConnection() {
+    public boolean getIsEntertainmentManager() {
+        return isEntertainmentManager;
+    }
+
+    public ResultSet getMinNumOfCrewPerManager() {
+        ResultSet rs = null;
+        String query = "";
         try {
-            conn.close();
+           Statement stmt =  conn.createStatement();
+            stmt.executeQuery(query);
         } catch (SQLException se) {
             se.printStackTrace();
         }
+        return rs;
+
     }
+
+    public ResultSet getDepartmentWithMaxNumberOfEmployees() {
+        ResultSet rs = null;
+        String query;
+           query = "select department, COUNT(*) AS numEmployees " +
+                        "from crew " +
+                        "group by department " +
+                        "having COUNT(*) = (select max(numE) from (SELECT COUNT(crew_id) AS numE FROM crew GROUP BY department)) ";
+
+//        query = "select department, COUNT(*) AS numEmployees " +
+//                "from crew " +
+//                "group by department " +
+//                "having COUNT(*) = 3 ";
+
+        System.out.println(query);
+        try {
+            Statement stmt = conn.createStatement();
+           rs = stmt.executeQuery(query);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return rs;
+
+    }
+
 
 }

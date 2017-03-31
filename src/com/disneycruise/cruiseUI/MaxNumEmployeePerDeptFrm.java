@@ -1,8 +1,12 @@
 package com.disneycruise.cruiseUI;
 
+import com.disneycruise.cruise.ManagerTableViews;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 
 public class MaxNumEmployeePerDeptFrm extends JFrame {
 
@@ -66,5 +71,23 @@ public class MaxNumEmployeePerDeptFrm extends JFrame {
 	}
 	
 	private void fillTable(Object o) {
+		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		dtm.setRowCount(0);
+
+		ManagerTableViews mtv = new ManagerTableViews();
+		ResultSet rs = mtv.getDepartmentWithMaxNumberOfEmployees();
+		try {
+			while (rs.next()) {
+				Vector v = new Vector();
+				v.add(rs.getString("department"));
+				v.add(rs.getInt("numEmployees"));
+
+				dtm.addRow(v);
+			}
+			rs.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+
+		}
 	}
 }

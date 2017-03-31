@@ -122,7 +122,7 @@ public class CrewScheduleInterFrm extends JFrame {
 		
 		this.fillCleanTable(new Object(), input, isWorkPlaceQuery, isCrewIDQuery);
 		this.fillEntertainmentTable(new Object(), input, isWorkPlaceQuery, isCrewIDQuery);
-		this.fillPsgTable(new Object());
+		this.fillPsgTable(new Object(), input, isWorkPlaceQuery, isCrewIDQuery);
 	}
 	
 	private void fillCleanTable(Object o, String input, boolean isWorkPlaceQuery, boolean isCrewIDQuery) {
@@ -188,7 +188,7 @@ public class CrewScheduleInterFrm extends JFrame {
 		}
 	}
 	
-	private void fillPsgTable(Object o) {
+	private void fillPsgTable(Object o, String input, boolean isWorkPlaceQuery, boolean isCrewIDQuery) {
 		DefaultTableModel dtm = (DefaultTableModel) passengerName_table.getModel();
 		dtm.setRowCount(0);
 		/*
@@ -196,7 +196,26 @@ public class CrewScheduleInterFrm extends JFrame {
 		 * with your query database code 
 		 * to get passenger name if the crewid work in cabin from database as variable rs
 			*/
+		CrewTableViews ctv = new CrewTableViews();
 
+		ResultSet rs = null;
+		if (isWorkPlaceQuery) {
+			rs = ctv.getCrewPassengerTableByDepartment(input);
+		}
+		if (isCrewIDQuery) {
+			rs = ctv.getCrewPassengerTableByCrewID(input);
+		}
+		try {
+			while (rs.next()) {
+				Vector v = new Vector();
+				v.add(rs.getString("pname"));
+				v.add(rs.getString("cid"));
+
+				dtm.addRow(v);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	
 	}
 

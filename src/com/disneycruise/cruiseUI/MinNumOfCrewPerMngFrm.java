@@ -1,5 +1,7 @@
 package com.disneycruise.cruiseUI;
 
+import com.disneycruise.cruise.ManagerTableViews;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -10,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.util.Vector;
 
 public class MinNumOfCrewPerMngFrm extends JFrame {
 
@@ -65,6 +69,24 @@ public class MinNumOfCrewPerMngFrm extends JFrame {
 	}
 	
 	private void fillTable(Object o) {
+		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		dtm.setRowCount(0);
+		ManagerTableViews mtv = new ManagerTableViews();
+		ResultSet rs = mtv.getMinNumOfCrewPerManager();
+		try {
+			while (rs.next()) {
+				Vector v = new Vector();
+				v.add(rs.getString("pname"));
+				v.add(rs.getString("cid"));
+				v.add(rs.getString("cid"));
+				v.add(rs.getString("cid"));
+
+
+				dtm.addRow(v);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 }
 

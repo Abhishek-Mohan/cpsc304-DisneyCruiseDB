@@ -163,8 +163,8 @@ public class ManagerScheduleInterFrm extends JFrame {
 				 * with your query database code 
 				 * to remove a schedule by esid/csid which in variable esidcsidSchRm_textField
 				 */
-				
-				//fillCrwSchTable(new Object());
+			ManagerTableViews mtv = new ManagerTableViews();
+			mtv.removeCrewMembersSchedule(rm);
 			}
 		});
 		removeCrwSch_Button.setFont(new Font("Arial", Font.PLAIN, 18));
