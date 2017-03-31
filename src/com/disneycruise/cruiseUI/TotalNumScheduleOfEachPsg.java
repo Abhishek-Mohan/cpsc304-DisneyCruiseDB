@@ -37,23 +37,24 @@ public class TotalNumScheduleOfEachPsg extends JFrame {
 	 */
 	public TotalNumScheduleOfEachPsg() {
 		setTitle("Total Number of Schedules of Each Passenger");
-		setBounds(100, 100, 557, 555);
+		setBounds(100, 100, 616, 569);
 		getContentPane().setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(15, 15, 517, 484);
+		scrollPane.setBounds(15, 15, 564, 484);
 
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-				new Object[][]{
+				new Object[][] {
 				},
-				new String[]{
-						"pid", "Passenger Name", "Total Number of Schedules"
+				new String[] {
+						"Passenger ID", "Passenger Name", "Total Number of Schedules"
 				}
 		));
+		table.getColumnModel().getColumn(0).setPreferredWidth(119);
 		table.getColumnModel().getColumn(1).setPreferredWidth(165);
-		table.getColumnModel().getColumn(2).setPreferredWidth(255);
+		table.getColumnModel().getColumn(2).setPreferredWidth(242);
 		table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		table.setBounds(565, 96, 33, 52);
 		scrollPane.setViewportView(table);

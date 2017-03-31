@@ -48,7 +48,7 @@ public class MaxNumEmployeePerDeptFrm extends JFrame {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
+
 			},
 			new String[] {
 				"Department Name", "Crew id", "Crew Name", "Max Number"

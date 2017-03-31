@@ -48,85 +48,91 @@ public class PsgSchedulesInterFrm extends JFrame {
 	public PsgSchedulesInterFrm() {
 //		setMaximizable(true);
 		setTitle("Passenger Schedules");
-		setBounds(10, 10, 900, 907);
+		setBounds(10, 10, 1166, 921);
 		getContentPane().setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 50, 650, 370);
-		
-		
+		scrollPane.setBounds(0, 50, 858, 370);
+
+
 		ps_table = new JTable();
 		ps_table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"sid", "pid", "eid", "Event Name", "Location", "Start Time", "End Time"
-			}
+				new Object[][] {
+				},
+				new String[] {
+						"Schedule ID", "Passenger ID", "Entertainment ID", "Event Name", "Location", "Start Time", "End Time"
+				}
 		));
-		ps_table.getColumnModel().getColumn(3).setPreferredWidth(115);
+		ps_table.getColumnModel().getColumn(0).setPreferredWidth(118);
+		ps_table.getColumnModel().getColumn(1).setPreferredWidth(122);
+		ps_table.getColumnModel().getColumn(2).setPreferredWidth(159);
+		ps_table.getColumnModel().getColumn(3).setPreferredWidth(125);
 		ps_table.getColumnModel().getColumn(4).setPreferredWidth(105);
-		ps_table.getColumnModel().getColumn(5).setPreferredWidth(105);
-		ps_table.getColumnModel().getColumn(6).setPreferredWidth(105);
+		ps_table.getColumnModel().getColumn(5).setPreferredWidth(125);
+		ps_table.getColumnModel().getColumn(6).setPreferredWidth(129);
 		ps_table.setBounds(73, 470, 524, 123);
 		scrollPane.setViewportView(ps_table);
 		getContentPane().add(scrollPane);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(0, 481, 650, 370);
+		scrollPane_1.setBounds(0, 481, 858, 370);
 		getContentPane().add(scrollPane_1);
-		
+
 		rm_table = new JTable();
 		rm_table.setModel(new DefaultTableModel(
 				new Object[][] {
 				},
 				new String[] {
-					"sid", "pid", "eid", "Event Name", "Location", "Start Time", "End Time"
+						"Schedule ID", "Passenger ID", "Entertainment ID", "Event Name", "Location", "Start Time", "End Time"
 				}
-			));
+		));
+		rm_table.getColumnModel().getColumn(0).setPreferredWidth(115);
+		rm_table.getColumnModel().getColumn(1).setPreferredWidth(128);
+		rm_table.getColumnModel().getColumn(2).setPreferredWidth(161);
 		rm_table.getColumnModel().getColumn(3).setPreferredWidth(115);
 		rm_table.getColumnModel().getColumn(4).setPreferredWidth(105);
 		rm_table.getColumnModel().getColumn(5).setPreferredWidth(105);
 		rm_table.getColumnModel().getColumn(6).setPreferredWidth(105);
 		scrollPane_1.setViewportView(rm_table);
 		getContentPane().add(scrollPane_1);
-		
+
 		JLabel lblPassengersSchedule = new JLabel("Passenger's Schedule");
 		lblPassengersSchedule.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblPassengersSchedule.setBounds(15, 14, 227, 21);
 		getContentPane().add(lblPassengersSchedule);
-		
+
 		JLabel lblRoommatesSchedule = new JLabel("Roommate's Schedule");
 		lblRoommatesSchedule.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblRoommatesSchedule.setBounds(15, 448, 227, 21);
 		getContentPane().add(lblRoommatesSchedule);
-		
+
 		JLabel lblSearchScheduleBy = new JLabel("Search Schedule by pid:");
 		lblSearchScheduleBy.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblSearchScheduleBy.setBounds(665, 81, 235, 21);
+		lblSearchScheduleBy.setBounds(936, 60, 205, 21);
 		getContentPane().add(lblSearchScheduleBy);
-		
+
 		pidSearch_textField = new JTextField();
-		pidSearch_textField.setBounds(665, 117, 193, 27);
+		pidSearch_textField.setBounds(936, 99, 193, 27);
 		getContentPane().add(pidSearch_textField);
 		pidSearch_textField.setColumns(10);
-		
+
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String pid = pidSearch_textField.getText();
 				/* replace this commented block
-				 * with your query database code 
+				 * with your query database code
 				 * to find all schedules of specific pid which in variable pidSearch_textField
-				 */				
-				
+				 */
+
 				fillPsgTable(new Object());
 				fillRoommateTable(new Object(), pid);
 			}
 		});
 		btnSearch.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnSearch.setBounds(701, 159, 123, 29);
+		btnSearch.setBounds(978, 144, 123, 29);
 		getContentPane().add(btnSearch);
-		
+
 		JButton btnCreateSchedule = new JButton("Create Schedule");
 		btnCreateSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,34 +141,34 @@ public class PsgSchedulesInterFrm extends JFrame {
 					addPsgSchFrm= new AddPsgScheduleFrm();
 					addPsgSchFrm.setVisible(true);
 					addPsgSchFrm.setLocationRelativeTo(null);
-					
+
 				}else{
-					createSchOpen=false;					
+					createSchOpen=false;
 					addPsgSchFrm.dispose();
-					
+
 				}
 			}
 		});
 		btnCreateSchedule.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnCreateSchedule.setBounds(665, 406, 193, 38);
+		btnCreateSchedule.setBounds(936, 392, 193, 38);
 		getContentPane().add(btnCreateSchedule);
-		
+
 		JButton btnRemoveSchedule = new JButton("Remove");
-		
+
 		btnRemoveSchedule.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnRemoveSchedule.setBounds(701, 328, 123, 29);
+		btnRemoveSchedule.setBounds(978, 319, 123, 29);
 		getContentPane().add(btnRemoveSchedule);
-		
+
 		JLabel lblRemoveScheduleBy = new JLabel("Remove Schedule by sid:");
 		lblRemoveScheduleBy.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblRemoveScheduleBy.setBounds(665, 250, 215, 21);
+		lblRemoveScheduleBy.setBounds(936, 233, 208, 21);
 		getContentPane().add(lblRemoveScheduleBy);
-		
+
 		rmSchedule_textField = new JTextField();
-		rmSchedule_textField.setBounds(665, 286, 193, 27);
+		rmSchedule_textField.setBounds(936, 269, 193, 27);
 		getContentPane().add(rmSchedule_textField);
 		rmSchedule_textField.setColumns(10);
-		
+
 		btnRemoveSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String rm = rmSchedule_textField.getText();
@@ -177,10 +183,10 @@ public class PsgSchedulesInterFrm extends JFrame {
 				 */
 			}
 		});
-		
+
 		this.fillPsgTable(new Object());
 	}
-	
+
 	private void fillPsgTable(Object o) {
 		DefaultTableModel dtm = (DefaultTableModel) ps_table.getModel();
 		dtm.setRowCount(0);
@@ -188,24 +194,24 @@ public class PsgSchedulesInterFrm extends JFrame {
 
 		PassengerTableViews ptv = new PassengerTableViews();
 		ResultSet rs = ptv.getPassengerScheduleView(pid);
-			try {
+		try {
 
-				while (rs.next()) {
-					Vector v = new Vector();
-					v.add(rs.getString("sid"));
-					v.add(rs.getString("pid"));
-					v.add(rs.getString("eid"));
-					v.add(rs.getString("ename"));
-					v.add(rs.getString("eloc"));
-					v.add(rs.getObject("sstime"));
-					v.add(rs.getObject("setime"));
-					dtm.addRow(v);
-				}
-			} catch (SQLException se) {
-				se.printStackTrace();
+			while (rs.next()) {
+				Vector v = new Vector();
+				v.add(rs.getString("sid"));
+				v.add(rs.getString("pid"));
+				v.add(rs.getString("eid"));
+				v.add(rs.getString("ename"));
+				v.add(rs.getString("eloc"));
+				v.add(rs.getObject("sstime"));
+				v.add(rs.getObject("setime"));
+				dtm.addRow(v);
 			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
-	
+
 	private void fillRoommateTable(Object o, String roomMate) {
 		DefaultTableModel dtm = (DefaultTableModel) rm_table.getModel();
 		dtm.setRowCount(0);
@@ -233,7 +239,7 @@ public class PsgSchedulesInterFrm extends JFrame {
 			se.printStackTrace();
 		}
 	}
-	
+
 	private boolean createSchOpen=false;
 	private AddPsgScheduleFrm addPsgSchFrm;
 }
