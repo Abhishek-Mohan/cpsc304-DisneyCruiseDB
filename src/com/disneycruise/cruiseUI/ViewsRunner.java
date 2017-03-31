@@ -44,69 +44,71 @@ public class ViewsRunner extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblDisneycruisedbViews = new JLabel("DisneyCruiseDB Views:");
 		lblDisneycruisedbViews.setFont(new Font("Arial", Font.PLAIN, 23));
 		lblDisneycruisedbViews.setBounds(62, 47, 251, 36);
 		contentPane.add(lblDisneycruisedbViews);
-		
+
 		JButton btnNewButton = new JButton("Passenger View");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!psgOpen){
-					psgOpen = true;
-					p1 = new PassengerFrm();
-					p1.setVisible(true);
+				if(!psgLogin){
+					psgLogin = true;
+					plg = new PassengerLoginFrm();
+					plg.setVisible(true);
+					plg.setLocationRelativeTo(null);
 				}else{
-					psgOpen = false;
-					p1.dispose();
-				}				
+					psgLogin = false;
+					plg.dispose();
+				}
 			}
 		});
-		
+
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 20));
 		btnNewButton.setBounds(101, 139, 185, 59);
 		contentPane.add(btnNewButton);
-		
+
 		JButton btnManagerView = new JButton("Manager View");
 		btnManagerView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!mngOpen){
-					mngOpen = true;
-					m1 = new ManagerFrm();
+				if(!mngLogin){
+					mngLogin = true;
+					m1 = new ManagerLoginFrm();
 					m1.setVisible(true);
+					m1.setLocationRelativeTo(null);
 				}else{
-					mngOpen = false;
+					mngLogin = false;
 					m1.dispose();
-				}		
+				}
 			}
 		});
 		btnManagerView.setFont(new Font("Arial", Font.PLAIN, 20));
 		btnManagerView.setBounds(101, 250, 185, 59);
 		contentPane.add(btnManagerView);
-		
+
 		JButton btnCrewView = new JButton("Crew View");
 		btnCrewView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!crwOpen){
-					crwOpen = true;
-					c1 = new CrewFrm();
+				if(!crwLogin){
+					crwLogin = true;
+					c1 = new CrewLoginFrm();
 					c1.setVisible(true);
+					c1.setLocationRelativeTo(null);
 				}else{
-					crwOpen = false;
+					crwLogin = false;
 					c1.dispose();
-				}		
+				}
 			}
 		});
 		btnCrewView.setFont(new Font("Arial", Font.PLAIN, 20));
 		btnCrewView.setBounds(101, 361, 185, 59);
 		contentPane.add(btnCrewView);
 	}
-	
-	 private boolean psgOpen=false, mngOpen=false, crwOpen=false;
-	 private PassengerFrm p1;
-	 private ManagerFrm m1;
-	 private CrewFrm c1;
 
+	private boolean mngLogin=false, crwLogin=false, psgLogin=false;
+	private ManagerLoginFrm m1;
+	private CrewLoginFrm c1;
+	private PassengerLoginFrm plg;
 
 }
