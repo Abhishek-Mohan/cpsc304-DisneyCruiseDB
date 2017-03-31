@@ -1,5 +1,7 @@
 package com.disneycruise.cruiseUI;
 
+import com.disneycruise.cruise.ManagerTableViews;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -144,7 +146,10 @@ public class ManagerUpdateSchFrm extends JFrame {
 					JOptionPane.showMessageDialog(null, "man_id CANNOT be empty!");
 					return;
 				}
-				
+
+				ManagerTableViews mtv = new ManagerTableViews();
+				mtv.updateCrewSchedule(csidt, esidt, eidt, startimet, endtimet, crewid, manid);
+
 				/* replace this commented block
 				 * with your query database code 
 				 * to update schedule tables of database

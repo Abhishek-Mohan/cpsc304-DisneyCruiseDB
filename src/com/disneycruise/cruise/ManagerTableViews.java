@@ -12,6 +12,8 @@ public class ManagerTableViews {
     java.sql.Connection conn = Database.getInstance().getConnection();
     boolean isCleaningManager;
     boolean isEntertainmentManager;
+    boolean isEntertainmentSchedule;
+    boolean isCleaningSchedule;
 
     public ManagerTableViews() {
     }
@@ -95,8 +97,6 @@ public class ManagerTableViews {
         }
         return rs3;
     }
-
-    public
 
     public ResultSet getManagerCrewScheduleByManID(String man_id) {
         isEntertainmentManager = false;
@@ -223,6 +223,79 @@ public class ManagerTableViews {
         return rs3;
     }
 
+    public void createCrewSchedule(String csid, String esid, String eid, String startTime, String endTime, String crew_id, String man_id) {
+        ResultSet rs = null;
+        String query = null;
+        if (!csid.isEmpty()) {
+            isCleaningSchedule = true;
+            query = "INSERT INTO cleaningschedule " + "( csid, " + "cs_stime, " +"cs_etime, " + "man_id ) " +
+                    "VALUES (?, ?, ?, ?)";
+        }
+        System.out.println(query);
+        if (!esid.isEmpty()) {
+            isEntertainmentSchedule = true;
+            query = "INSERT INTO entertainmentschedule " +
+                    "( '" + esid + "' '" + man_id + "') ";
+        }
+        System.out.println(query);
+
+        try {
+            if (isCleaningSchedule) {
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, csid);
+                stmt.setObject(2, startTime);
+                stmt.setObject(3, endTime);
+                stmt.setString(4, man_id);
+                stmt.executeUpdate();
+            }
+            if (isEntertainmentSchedule) {
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, esid);
+                stmt.setString(2, man_id);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+
+    public void updateCrewSchedule(String csid, String esid, String eid, String startTime, String endTime, String crew_id, String man_id) {
+        ResultSet rs = null;
+        String query = null;
+
+        if (!csid.isEmpty()) {
+            isCleaningSchedule = true;
+            query = "UPDATE cleaningschedule " + " SET csid = ?, cs_stime = ? , cs_etime = ? , man_id = ? ";
+        }
+        System.out.println(query);
+        if (!esid.isEmpty()) {
+            isEntertainmentSchedule = true;
+            query = "UPDATE entertainmentschedulecontent " + "SET esid = ?, es_stime = ?, es_etime = ?  ";
+
+        }
+        System.out.println(query);
+        try {
+            PreparedStatement stmt =  conn.prepareStatement(query);
+            if (isCleaningSchedule) {
+                stmt.setString(1, csid);
+                stmt.setObject(2, startTime);
+                stmt.setObject(3, endTime);
+                stmt.setString(4, man_id);
+                stmt.executeUpdate();
+            }
+            if (isEntertainmentSchedule) {
+              //  stmt.setString(1, esid);
+             //   stmt.setString(2, eid);
+                stmt.setObject(1, esid);
+                stmt.setObject(2, startTime);
+                stmt.setObject(3, endTime);
+
+                stmt.executeUpdate();
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+   }
 
     public boolean getIsEntertainmentManager() {
         return isEntertainmentManager;

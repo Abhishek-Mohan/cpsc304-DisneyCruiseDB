@@ -1,5 +1,7 @@
 package com.disneycruise.cruiseUI;
 
+import com.disneycruise.cruise.ManagerTableViews;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -144,7 +146,9 @@ public class ManagerAddSchForCrw extends JFrame {
 					JOptionPane.showMessageDialog(null, "man_id CANNOT be empty!");
 					return;
 				}
-				
+
+				ManagerTableViews mtv = new ManagerTableViews();
+				mtv.createCrewSchedule(csidt, esidt, eidt, startimet, endtimet, crewid, manid);
 				/* replace this commented block
 				 * with your query database code 
 				 * to insert values into schedule tables 
