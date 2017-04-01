@@ -184,5 +184,21 @@ public class PassengerTableViews {
         }
     }
 
+    public void removePassengerSchedule(String eid, String sid)  {
+
+        String query = "DELETE from schedulecontent where eid = '" + eid + "' AND " + "sid = '" + sid + "' ";
+        System.out.print(query);
+
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeQuery(query);
+
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+
 
 }

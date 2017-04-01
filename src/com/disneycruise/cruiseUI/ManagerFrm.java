@@ -111,7 +111,7 @@ public class ManagerFrm extends JFrame {
 		JButton btnBrowse_schedule = new JButton("Browse");
 
 		btnBrowse_schedule.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnBrowse_schedule.setBounds(1165, 164, 123, 29);
+		btnBrowse_schedule.setBounds(1365, 164, 123, 29);
 		contentPane.add(btnBrowse_schedule);
 
 		JLabel lblFindCrewBy = new JLabel("Find a crew's schedule :");

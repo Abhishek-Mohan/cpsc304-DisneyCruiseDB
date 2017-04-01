@@ -1,5 +1,7 @@
 package com.disneycruise.cruiseUI;
 
+import com.disneycruise.cruise.PassengerTableViews;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -70,6 +72,10 @@ public class PassengerRemoveSch extends JFrame {
 		JButton btnLogin = new JButton("Remove");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String eid = userName_txtFiled.getText();
+				String sid = passwordField.getText();
+				PassengerTableViews ptv = new PassengerTableViews();
+				ptv.removePassengerSchedule(eid, sid);
 				// add remove sql 	
 			}
 		});
