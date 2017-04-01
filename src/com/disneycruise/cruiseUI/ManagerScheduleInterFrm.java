@@ -192,9 +192,6 @@ public class ManagerScheduleInterFrm extends JFrame {
 		ManagerTableViews tv = new ManagerTableViews();
 		ResultSet rs = null;
 
-		if (isManID) {
-			rs = tv.getManagerCrewScheduleByManID(input);
-		}
 		if (isCrewID) {
 			rs = tv.getManagerCrewScheduleByCrewID(input);
 		}

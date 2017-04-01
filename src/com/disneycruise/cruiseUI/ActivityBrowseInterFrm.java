@@ -198,10 +198,8 @@ public class ActivityBrowseInterFrm extends JFrame {
 			while (rs.next()) {
 				Vector v = new Vector();
 				v.add(rs.getString("eid"));
-				v.add("-");
 				v.add(rs.getString("ename"));
 				v.add(rs.getString("eloc"));
-				v.add("-");
 				v.add(rs.getDate("edate"));
 				v.add(rs.getObject("en_stime"));
 				v.add(rs.getObject("en_etime"));
