@@ -124,7 +124,7 @@ public class CrewFrm extends JFrame {
 
 				String workplace  = workplace_textField.getText();
 				if(StringUtil.isEmpty(workplace)){
-					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty��");
+					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty");
 					return;
 				}
 				if(!crwSchOpen){
@@ -149,7 +149,7 @@ public class CrewFrm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String crwid = crewId_textField.getText();
 				if(StringUtil.isEmpty(crwid)){
-					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty��");
+					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty");
 					return;
 				}
 				if(!crwSchOpen){
