@@ -29,21 +29,20 @@ public class PassengerTableViews {
         return rs;
     }
 
-    public ResultSet getBrowseActivityTableView(String type, String location, String startTime, String endTime, String date) {
+    public ResultSet getBrowseActivityTableView(String name, String location, String startTime, String endTime, String date) {
         ResultSet rs = null;
         boolean needAND = false;
-        System.out.println(type);
-        System.out.println(type.isEmpty());
+        System.out.println(name.isEmpty());
         String query = "select * " +
                 "from entertainment ";
 
-        if (!type.isEmpty() || !location.isEmpty() || !startTime.isEmpty() || !endTime.isEmpty() || !date.isEmpty()) {
+        if (!name.isEmpty() || !location.isEmpty() || !startTime.isEmpty() || !endTime.isEmpty() || !date.isEmpty()) {
             query = query + "where ";
         }
 
 
-        if (!type.isEmpty()) {
-            query = query + "type = '" + type + "' ";
+        if (!name.isEmpty()) {
+            query = query + "name = '" + name + "' ";
             needAND = true;
         }
         if (!location.isEmpty()) {

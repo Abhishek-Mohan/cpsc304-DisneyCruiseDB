@@ -141,33 +141,9 @@ public class ManagerScheduleInterFrm extends JFrame {
 		updateCrwSch_button.setFont(new Font("Arial", Font.PLAIN, 18));
 		updateCrwSch_button.setBounds(898, 199, 172, 59);
 		getContentPane().add(updateCrwSch_button);
-		JLabel lblRemoveCrewsSchedule = new JLabel("Remove Crew's Schedule:");
-		lblRemoveCrewsSchedule.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblRemoveCrewsSchedule.setBounds(678, 303, 210, 21);
-		getContentPane().add(lblRemoveCrewsSchedule);
-		
-		JLabel lblEsidcsid = new JLabel("esid/csid:");
-		lblEsidcsid.setFont(new Font("Arial", Font.PLAIN, 17));
-		lblEsidcsid.setBounds(688, 328, 107, 21);
-		getContentPane().add(lblEsidcsid);
-		
 
 		
-		JButton removeCrwSch_Button = new JButton("Remove");
-		removeCrwSch_Button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 
-				/* replace this commented block
-				 * with your query database code 
-				 * to remove a schedule by esid/csid which in variable esidcsidSchRm_textField
-				 */
-			ManagerTableViews mtv = new ManagerTableViews();
-
-			}
-		});
-		removeCrwSch_Button.setFont(new Font("Arial", Font.PLAIN, 18));
-		removeCrwSch_Button.setBounds(697, 400, 172, 29);
-		getContentPane().add(removeCrwSch_Button);
 		this.fillMngSchTable(new Object());
 		this.fillCrwSchTable(new Object(), input, isManID, isCrewID);
 	}

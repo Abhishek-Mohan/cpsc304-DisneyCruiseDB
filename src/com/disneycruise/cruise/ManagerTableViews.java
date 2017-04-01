@@ -234,8 +234,9 @@ public class ManagerTableViews {
         System.out.println(query);
         if (!esid.isEmpty()) {
             isEntertainmentSchedule = true;
-            query = "INSERT INTO entertainmentschedule " +
-                    "( '" + esid + "' '" + man_id + "') ";
+            query = "INSERT INTO entertainmentschedulecontent " + "( esid, " + "eid, " +"es_stime, " + "es_etime ) " +
+                    "VALUES (?, ?, ?, ?)";
+
         }
         System.out.println(query);
 
@@ -251,7 +252,10 @@ public class ManagerTableViews {
             if (isEntertainmentSchedule) {
                 PreparedStatement stmt = conn.prepareStatement(query);
                 stmt.setString(1, esid);
-                stmt.setString(2, man_id);
+                stmt.setString(2, eid);
+                stmt.setString(2, startTime);
+                stmt.setString(2, endTime);
+
                 stmt.executeUpdate();
             }
         } catch (SQLException se) {
