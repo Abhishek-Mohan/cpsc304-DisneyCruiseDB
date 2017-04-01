@@ -253,8 +253,8 @@ public class ManagerTableViews {
                 PreparedStatement stmt = conn.prepareStatement(query);
                 stmt.setString(1, esid);
                 stmt.setString(2, eid);
-                stmt.setString(2, startTime);
-                stmt.setString(2, endTime);
+                stmt.setString(3, startTime);
+                stmt.setString(4, endTime);
 
                 stmt.executeUpdate();
             }
