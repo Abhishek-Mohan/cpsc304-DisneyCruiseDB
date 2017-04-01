@@ -32,7 +32,6 @@ public class PassengerFrm extends JFrame {
 	private JButton btnSchedules;
 	private JButton btnBrowseActivity;
 	private JButton btnNumberOfSchedules;
-	private JDesktopPane desktopPane;
 
 	/**
 	 * Launch the application.
@@ -57,43 +56,46 @@ public class PassengerFrm extends JFrame {
 		setTitle("Passenger View");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 715, 500);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);	
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(15, 15, 735, 956);
+		scrollPane.setBounds(15, 15, 1185, 956);
 		contentPane.add(scrollPane);
-		
+
 		table = new JTable();
 		table.setShowVerticalLines(false);
 		table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
-		table.setModel(new DefaultTableModel(				
-			new Object[][] {		
-			},
-			new String[] {
-				"pid", "pname", "age", "password", "cid"
-			}
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+						"Passenger ID", "Passenger Name", "Age", "Password", "Cabin ID"
+				}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, true, true, true, true
+					false, true, true, true, true
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
+		table.getColumnModel().getColumn(0).setPreferredWidth(131);
+		table.getColumnModel().getColumn(1).setPreferredWidth(145);
 		table.getColumnModel().getColumn(3).setPreferredWidth(111);
+		table.getColumnModel().getColumn(4).setPreferredWidth(102);
 		scrollPane.setViewportView(table);
 		table.setBounds(15, 15, 763, 956);
-		
+
 		btnSchedules = new JButton("Schedules");
-		
+
 		btnSchedules.setFont(new Font("Arial", Font.PLAIN, 20));
-		btnSchedules.setBounds(765, 90, 183, 50);
+		btnSchedules.setBounds(1406, 101, 183, 50);
 		contentPane.add(btnSchedules);
-		
+
 		btnBrowseActivity = new JButton("Browse Activity");
 		btnBrowseActivity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,18 +103,18 @@ public class PassengerFrm extends JFrame {
 					brwActOpen=true;
 					actBrwIF= new ActivityBrowseInterFrm();
 					actBrwIF.setVisible(true);
-					desktopPane.add(actBrwIF);
+//					desktopPane.add(actBrwIF);
 				}else{
-					brwActOpen=false;					
+					brwActOpen=false;
 					actBrwIF.dispose();
-					
+
 				}
 			}
 		});
 		btnBrowseActivity.setFont(new Font("Arial", Font.PLAIN, 20));
-		btnBrowseActivity.setBounds(765, 197, 183, 50);
+		btnBrowseActivity.setBounds(1406, 251, 183, 50);
 		contentPane.add(btnBrowseActivity);
-		
+
 		btnNumberOfSchedules = new JButton("<html><font color=black>Total Number of </font> <br> <font color=black>Schedules of </font><br> <font color=black>each Passenger</font></html>");
 		btnNumberOfSchedules.setFont(new Font("Arial", Font.PLAIN, 20));
 		btnNumberOfSchedules.addActionListener(new ActionListener() {
@@ -121,39 +123,34 @@ public class PassengerFrm extends JFrame {
 					totalSchOpen=true;
 					totalSchIF= new TotalNumScheduleOfEachPsg();
 					totalSchIF.setVisible(true);
-					desktopPane.add(totalSchIF);
+//					desktopPane.add(totalSchIF);
 				}else{
-					totalSchOpen=false;					
+					totalSchOpen=false;
 					totalSchIF.dispose();
-					
+
 				}
 			}
 		});
-		btnNumberOfSchedules.setBounds(765, 306, 183, 91);
+		btnNumberOfSchedules.setBounds(1406, 389, 183, 91);
 		contentPane.add(btnNumberOfSchedules);
-		
-		desktopPane = new JDesktopPane();
-		
+
 		btnSchedules.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!PsgSchOpen){
 					PsgSchOpen=true;
 					psgSI= new PsgSchedulesInterFrm();
 					psgSI.setVisible(true);
-					desktopPane.add(psgSI);
+//					desktopPane.add(psgSI);
 				}else{
-					PsgSchOpen=false;					
+					PsgSchOpen=false;
 					psgSI.dispose();
-					
+
 				}
 			}
 		});
-		
-		desktopPane.setBounds(963, 0, 949, 986);
-		contentPane.add(desktopPane);		
 		this.fillTable(new Object());
 	}
-	
+
 	private void fillTable(Object o) {
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
@@ -177,8 +174,8 @@ public class PassengerFrm extends JFrame {
 
 		}
 	}
-	
-	
+
+
 	private boolean PsgSchOpen = false, brwActOpen=false, totalSchOpen=false;
 	private PsgSchedulesInterFrm psgSI;
 	private ActivityBrowseInterFrm actBrwIF;
