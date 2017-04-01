@@ -24,7 +24,6 @@ public class PsgSchedulesInterFrm extends JFrame {
 	private JTable ps_table;
 	private JTable rm_table;
 	private JTextField pidSearch_textField;
-	private JTextField rmSchedule_textField;
 
 	/**
 	 * Launch the application.
@@ -108,11 +107,11 @@ public class PsgSchedulesInterFrm extends JFrame {
 
 		JLabel lblSearchScheduleBy = new JLabel("Search Schedule by pid:");
 		lblSearchScheduleBy.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblSearchScheduleBy.setBounds(936, 60, 205, 21);
+		lblSearchScheduleBy.setBounds(911, 60, 205, 21);
 		getContentPane().add(lblSearchScheduleBy);
 
 		pidSearch_textField = new JTextField();
-		pidSearch_textField.setBounds(936, 99, 193, 27);
+		pidSearch_textField.setBounds(921, 91, 193, 27);
 		getContentPane().add(pidSearch_textField);
 		pidSearch_textField.setColumns(10);
 
@@ -130,10 +129,10 @@ public class PsgSchedulesInterFrm extends JFrame {
 			}
 		});
 		btnSearch.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnSearch.setBounds(978, 144, 123, 29);
+		btnSearch.setBounds(954, 147, 123, 29);
 		getContentPane().add(btnSearch);
 
-		JButton btnCreateSchedule = new JButton("Create Schedule");
+		JButton btnCreateSchedule = new JButton("<html><font>Add Schedule</font><br><font> Content</font></html>");
 		btnCreateSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!createSchOpen){
@@ -150,35 +149,31 @@ public class PsgSchedulesInterFrm extends JFrame {
 			}
 		});
 		btnCreateSchedule.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnCreateSchedule.setBounds(936, 392, 193, 38);
+		btnCreateSchedule.setBounds(940, 328, 149, 61);
 		getContentPane().add(btnCreateSchedule);
 
 		JButton btnRemoveSchedule = new JButton("Remove");
 
 		btnRemoveSchedule.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnRemoveSchedule.setBounds(978, 319, 123, 29);
+		btnRemoveSchedule.setBounds(954, 242, 123, 29);
 		getContentPane().add(btnRemoveSchedule);
-
-		JLabel lblRemoveScheduleBy = new JLabel("Remove Schedule by sid:");
-		lblRemoveScheduleBy.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblRemoveScheduleBy.setBounds(936, 233, 208, 21);
-		getContentPane().add(lblRemoveScheduleBy);
-
-		rmSchedule_textField = new JTextField();
-		rmSchedule_textField.setBounds(936, 269, 193, 27);
-		getContentPane().add(rmSchedule_textField);
-		rmSchedule_textField.setColumns(10);
 
 		btnRemoveSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String rm = rmSchedule_textField.getText();
-				if(StringUtil.isEmpty(rm)){
-					JOptionPane.showMessageDialog(null, "sid cannot be null!");
-					return;
+				if(!removeOpen){
+					removeOpen=true;
+					removeSch= new PassengerRemoveSch();
+					removeSch.setVisible(true);
+					removeSch.setLocationRelativeTo(null);
+
+				}else{
+					removeOpen=false;
+					removeSch.dispose();
+
 				}
 
 				/* replace this commented block
-				 * with your query database code 
+				 * with your query database code
 				 * to remove a schedule by sid which in variable rmSchedule_textField
 				 */
 			}
@@ -217,7 +212,7 @@ public class PsgSchedulesInterFrm extends JFrame {
 		dtm.setRowCount(0);
 		/*
 		 * replace this commented block
-		 * with your query database code 
+		 * with your query database code
 		 * to get all passenger data from database as variable rs
 		*/
 		PassengerTableViews ptv = new PassengerTableViews();
@@ -240,6 +235,7 @@ public class PsgSchedulesInterFrm extends JFrame {
 		}
 	}
 
-	private boolean createSchOpen=false;
+	private boolean createSchOpen=false, removeOpen=false;
 	private AddPsgScheduleFrm addPsgSchFrm;
+	private PassengerRemoveSch removeSch;
 }

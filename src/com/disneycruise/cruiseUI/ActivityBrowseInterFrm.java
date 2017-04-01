@@ -50,11 +50,11 @@ public class ActivityBrowseInterFrm extends JFrame {
 	public ActivityBrowseInterFrm() {
 
 		setTitle("Activity Browser");
-		setBounds(10, 10, 967, 930);
+		setBounds(10, 10, 1165, 930);
 		getContentPane().setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(15, 15, 709, 859);
+		scrollPane.setBounds(15, 15, 901, 859);
 
 
 		act_table = new JTable();
@@ -65,8 +65,11 @@ public class ActivityBrowseInterFrm extends JFrame {
 						"Entertainment ID", "Type", "Name", "Location", "Seats", "Date", "Start", "End"
 				}
 		));
-		act_table.getColumnModel().getColumn(0).setPreferredWidth(158);
+		act_table.getColumnModel().getColumn(0).setPreferredWidth(156);
 		act_table.getColumnModel().getColumn(3).setPreferredWidth(105);
+		act_table.getColumnModel().getColumn(5).setPreferredWidth(96);
+		act_table.getColumnModel().getColumn(6).setPreferredWidth(139);
+		act_table.getColumnModel().getColumn(7).setPreferredWidth(140);
 		act_table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		act_table.setBounds(697, 164, 34, 179);
 		scrollPane.setViewportView(act_table);
@@ -74,52 +77,52 @@ public class ActivityBrowseInterFrm extends JFrame {
 
 		JLabel lblType = new JLabel("Type:");
 		lblType.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblType.setBounds(739, 40, 56, 21);
+		lblType.setBounds(955, 40, 56, 21);
 		getContentPane().add(lblType);
 
 		JLabel lblDate = new JLabel("Date:");
 		lblDate.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblDate.setBounds(739, 118, 56, 21);
+		lblDate.setBounds(955, 118, 56, 21);
 		getContentPane().add(lblDate);
 
 		JLabel lblStartTime = new JLabel("Start Time:");
 		lblStartTime.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblStartTime.setBounds(739, 196, 88, 21);
+		lblStartTime.setBounds(955, 196, 88, 21);
 		getContentPane().add(lblStartTime);
 
 		JLabel lblLocation = new JLabel("Location:");
 		lblLocation.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblLocation.setBounds(739, 348, 88, 21);
+		lblLocation.setBounds(955, 348, 88, 21);
 		getContentPane().add(lblLocation);
 
 		JLabel lblEndTime = new JLabel("End Time:");
 		lblEndTime.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblEndTime.setBounds(739, 274, 88, 21);
+		lblEndTime.setBounds(955, 274, 88, 21);
 		getContentPane().add(lblEndTime);
 
 		type_textField = new JTextField();
-		type_textField.setBounds(739, 76, 183, 27);
+		type_textField.setBounds(945, 76, 183, 27);
 		getContentPane().add(type_textField);
 		type_textField.setColumns(10);
 
 		date_textField = new JTextField();
 		date_textField.setColumns(10);
-		date_textField.setBounds(739, 154, 183, 27);
+		date_textField.setBounds(945, 154, 183, 27);
 		getContentPane().add(date_textField);
 
 		startTime_textField = new JTextField();
 		startTime_textField.setColumns(10);
-		startTime_textField.setBounds(739, 232, 183, 27);
+		startTime_textField.setBounds(945, 232, 183, 27);
 		getContentPane().add(startTime_textField);
 
 		endTime_textField = new JTextField();
 		endTime_textField.setColumns(10);
-		endTime_textField.setBounds(739, 297, 183, 27);
+		endTime_textField.setBounds(945, 297, 183, 27);
 		getContentPane().add(endTime_textField);
 
 		location_textField = new JTextField();
 		location_textField.setColumns(10);
-		location_textField.setBounds(739, 379, 183, 27);
+		location_textField.setBounds(945, 379, 183, 27);
 		getContentPane().add(location_textField);
 
 		JButton btnSearch = new JButton("Search");
@@ -141,7 +144,7 @@ public class ActivityBrowseInterFrm extends JFrame {
 			}
 		});
 		btnSearch.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnSearch.setBounds(772, 452, 123, 29);
+		btnSearch.setBounds(974, 448, 123, 29);
 		getContentPane().add(btnSearch);
 
 		JButton btnPopularActivity = new JButton("Popular Activity");
@@ -163,7 +166,7 @@ public class ActivityBrowseInterFrm extends JFrame {
 			}
 		});
 		btnPopularActivity.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnPopularActivity.setBounds(739, 518, 183, 29);
+		btnPopularActivity.setBounds(945, 516, 183, 29);
 		getContentPane().add(btnPopularActivity);
 		this.fillTable(new Object(), false);
 

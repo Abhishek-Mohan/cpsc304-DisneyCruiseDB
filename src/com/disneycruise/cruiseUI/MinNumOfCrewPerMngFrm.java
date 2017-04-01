@@ -49,14 +49,11 @@ public class MinNumOfCrewPerMngFrm extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Count", "Crew Name", "Crew id", "Manager Name", "Manager id"
+				"Count", "Manager ID"
 			}
 		));
 		table.getColumnModel().getColumn(0).setPreferredWidth(76);
 		table.getColumnModel().getColumn(1).setPreferredWidth(138);
-		table.getColumnModel().getColumn(2).setPreferredWidth(150);
-		table.getColumnModel().getColumn(3).setPreferredWidth(173);
-		table.getColumnModel().getColumn(4).setPreferredWidth(147);
 		table.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
 		table.setBounds(565, 96, 33, 52);
 		scrollPane.setViewportView(table);
