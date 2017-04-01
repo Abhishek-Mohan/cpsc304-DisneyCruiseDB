@@ -161,7 +161,7 @@ public class PassengerTableViews {
     return rs;
     }
 
-    public void createScheduleContent(String sid, String pid, String eid, String sstime, String setime) {
+    public void createScheduleContent(String sid, String eid, String sstime, String setime) {
         ResultSet rs = null;
         String query = null;
             query = "INSERT INTO schedulecontent " + "( sid, " + "eid, " + "sstime, " + "setime ) " +

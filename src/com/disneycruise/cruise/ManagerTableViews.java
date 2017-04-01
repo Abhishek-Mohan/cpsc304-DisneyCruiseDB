@@ -223,7 +223,7 @@ public class ManagerTableViews {
         return rs3;
     }
 
-    public void createCrewSchedule(String csid, String esid, String eid, String startTime, String endTime, String crew_id, String man_id) {
+    public void createCrewSchedule(String csid, String esid, String eid, String startTime, String endTime, String man_id) {
         ResultSet rs = null;
         String query = null;
         if (!csid.isEmpty()) {
@@ -259,7 +259,7 @@ public class ManagerTableViews {
         }
     }
 
-    public void updateCrewSchedule(String csid, String esid, String eid, String startTime, String endTime, String crew_id, String man_id) {
+    public void updateCrewSchedule(String csid, String esid, String eid, String startTime, String endTime, String man_id) {
         ResultSet rs = null;
         String query = null;
 

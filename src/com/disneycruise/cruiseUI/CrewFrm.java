@@ -56,7 +56,7 @@ public class CrewFrm extends JFrame {
 	public CrewFrm() {
 		setTitle("Crew View");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 715, 500);
+		setBounds(100, 100, 1711, 1042);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);	
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,7 +64,7 @@ public class CrewFrm extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(15, 15, 663, 956);
+		scrollPane.setBounds(15, 15, 1335, 956);
 		
 		
 		table = new JTable();
@@ -72,7 +72,7 @@ public class CrewFrm extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"crew_id", "Name", "Department", "cid", "csid", "esid"
+				"Crew ID", "Name", "Department", "Cabin ID", "Clean Schedule ID", "Entainment Schedule ID"
 			}
 		));
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
@@ -84,42 +84,39 @@ public class CrewFrm extends JFrame {
 		
 		lblFindScheduleBy = new JLabel("Browse Schedule by crew_id:");
 		lblFindScheduleBy.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblFindScheduleBy.setBounds(699, 70, 247, 21);
+		lblFindScheduleBy.setBounds(1380, 75, 247, 21);
 		contentPane.add(lblFindScheduleBy);
 		
 		JCheckBox isManager_CheckBox = new JCheckBox("Is Manager");
 		isManager_CheckBox.setFont(new Font("Arial", Font.PLAIN, 17));
-		isManager_CheckBox.setBounds(709, 316, 129, 29);
+		isManager_CheckBox.setBounds(1393, 375, 129, 29);
 		contentPane.add(isManager_CheckBox);
 		
 		JLabel lblWorkPlace = new JLabel("Work Place:");
 		lblWorkPlace.setFont(new Font("Arial", Font.PLAIN, 17));
-		lblWorkPlace.setBounds(709, 250, 115, 21);
+		lblWorkPlace.setBounds(1393, 301, 115, 21);
 		contentPane.add(lblWorkPlace);
 		
 		workplace_textField = new JTextField();
-		workplace_textField.setBounds(709, 277, 215, 27);
+		workplace_textField.setBounds(1393, 337, 215, 27);
 		contentPane.add(workplace_textField);
 		workplace_textField.setColumns(10);
 		
 		crewId_textField = new JTextField();
-		crewId_textField.setBounds(709, 106, 215, 27);
+		crewId_textField.setBounds(1393, 130, 215, 27);
 		contentPane.add(crewId_textField);
 		crewId_textField.setColumns(10);
 		
 		JButton btnBrowse_schedule = new JButton("Browse");
 		
 		btnBrowse_schedule.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnBrowse_schedule.setBounds(752, 148, 123, 29);
+		btnBrowse_schedule.setBounds(1443, 184, 123, 29);
 		contentPane.add(btnBrowse_schedule);
 		
 		JLabel lblFindCrewBy = new JLabel("Find crew by work place:");
 		lblFindCrewBy.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblFindCrewBy.setBounds(699, 217, 231, 21);
+		lblFindCrewBy.setBounds(1380, 276, 231, 21);
 		contentPane.add(lblFindCrewBy);
-
-		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(962, 0, 950, 986);
 		
 		JButton btnFindCrew = new JButton("Find");
 		btnFindCrew.addActionListener(new ActionListener() {
@@ -127,14 +124,14 @@ public class CrewFrm extends JFrame {
 
 				String workplace  = workplace_textField.getText();
 				if(StringUtil.isEmpty(workplace)){
-					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty��");
+					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty");
 					return;
 				}
 				if(!crwSchOpen){
 					crwSchOpen=true;
 					crwSchIF= new CrewScheduleInterFrm(workplace, true, false);
 					crwSchIF.setVisible(true);
-					desktopPane.add(crwSchIF);
+					//desktopPane.add(crwSchIF);
 				}else{
 					crwSchOpen=false;
 					crwSchIF.dispose();
@@ -144,23 +141,22 @@ public class CrewFrm extends JFrame {
 
 		});
 		btnFindCrew.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnFindCrew.setBounds(752, 368, 123, 29);
+		btnFindCrew.setBounds(1443, 428, 123, 29);
 		contentPane.add(btnFindCrew);
-		contentPane.add(desktopPane);
 
 
 		btnBrowse_schedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String crwid = crewId_textField.getText();
 				if(StringUtil.isEmpty(crwid)){
-					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty��");
+					JOptionPane.showMessageDialog(null, "crew_id CANNOT be empty");
 					return;
 				}
 				if(!crwSchOpen){
 					crwSchOpen=true;
 					crwSchIF= new CrewScheduleInterFrm(crwid, false, true);
 					crwSchIF.setVisible(true);
-					desktopPane.add(crwSchIF);
+					//desktopPane.add(crwSchIF);
 				}else{
 					crwSchOpen=false;					
 					crwSchIF.dispose();
@@ -168,7 +164,6 @@ public class CrewFrm extends JFrame {
 				}
 			}
 		});
-		contentPane.add(desktopPane);
 		this.fillTable(new Object());
 	}
 	

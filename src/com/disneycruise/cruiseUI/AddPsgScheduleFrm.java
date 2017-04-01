@@ -25,7 +25,6 @@ public class AddPsgScheduleFrm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField sid_textField;
-	private JTextField pid_textField;
 	private JTextField eid_textField;
 	private JTextField sstime_textField;
 	private JTextField setime_textField;
@@ -54,79 +53,68 @@ public class AddPsgScheduleFrm extends JFrame {
 	public AddPsgScheduleFrm() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 586, 518);
-	
+		setBounds(100, 100, 600, 432);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		setTitle("Create Schedule");
-		setBounds(100, 100, 500, 488);
+		setBounds(100, 100, 600, 488);
 		contentPane.setLayout(null);
-		
-		JLabel lblSid = new JLabel("sid:");
+
+		JLabel lblSid = new JLabel("Schedule ID:");
 		lblSid.setFont(new Font("Arial", Font.PLAIN, 18));
-		
-		lblSid.setBounds(49, 59, 43, 21);
+
+		lblSid.setBounds(81, 59, 102, 21);
 		contentPane.add(lblSid);
-		
-		JLabel lblPid = new JLabel("pid:");
-		lblPid.setFont(new Font("Arial", Font.PLAIN, 18));
-		
-		lblPid.setBounds(49, 112, 43, 21);
-		contentPane.add(lblPid);
-		
-		JLabel lblEid = new JLabel("eid:");
+
+		JLabel lblEid = new JLabel("Entertainment ID:");
 		lblEid.setFont(new Font("Arial", Font.PLAIN, 18));
-		
-		lblEid.setBounds(49, 163, 43, 21);
+
+		lblEid.setBounds(49, 120, 144, 21);
 		contentPane.add(lblEid);
-		
-		JLabel lblSstime = new JLabel("sstime:");
+
+		JLabel lblSstime = new JLabel("Schedule Start Time:");
 		lblSstime.setFont(new Font("Arial", Font.PLAIN, 18));
-		
-		lblSstime.setBounds(24, 219, 68, 21);
+
+		lblSstime.setBounds(24, 179, 190, 21);
 		contentPane.add(lblSstime);
-		
-		JLabel lblSetime = new JLabel("setime:");
+
+		JLabel lblSetime = new JLabel("Schedule End Time:");
 		lblSetime.setFont(new Font("Arial", Font.PLAIN, 18));
-		
-		lblSetime.setBounds(24, 271, 68, 21);
+
+		lblSetime.setBounds(24, 238, 169, 21);
 		contentPane.add(lblSetime);
-		
+
 		sid_textField = new JTextField();
 		sid_textField.setFont(new Font("SimSun-ExtB", Font.PLAIN, 18));
-		sid_textField.setBounds(96, 55, 327, 27);
+		sid_textField.setBounds(208, 55, 327, 27);
 		contentPane.add(sid_textField);
 		sid_textField.setColumns(10);
-		
-		pid_textField = new JTextField();
-		pid_textField.setColumns(10);
-		pid_textField.setBounds(96, 108, 327, 27);
-		contentPane.add(pid_textField);
-		
+
 		eid_textField = new JTextField();
 		eid_textField.setColumns(10);
-		eid_textField.setBounds(96, 159, 327, 27);
+		eid_textField.setBounds(208, 116, 327, 27);
 		contentPane.add(eid_textField);
-		
+
 		sstime_textField = new JTextField();
 		sstime_textField.setColumns(10);
-		sstime_textField.setBounds(96, 215, 327, 27);
+		sstime_textField.setBounds(208, 175, 327, 27);
 		contentPane.add(sstime_textField);
-		
+
 		setime_textField = new JTextField();
 		setime_textField.setColumns(10);
-		setime_textField.setBounds(96, 267, 327, 27);
+		setime_textField.setBounds(208, 234, 327, 27);
 		contentPane.add(setime_textField);
-		
+
 		btnCreate_1 = new JButton("Create");
 		btnCreate_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String sidt = sid_textField.getText(), pidt=pid_textField.getText();
-				String eidt = eid_textField.getText();
-				String sstt = sstime_textField.getText();
+
+				String sidt = sid_textField.getText();
+				String eidt = eid_textField.getText(), sstt=sstime_textField.getText();
 				String sett = setime_textField.getText();
 
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -141,9 +129,6 @@ public class AddPsgScheduleFrm extends JFrame {
 				if(StringUtil.isEmpty(sidt)){
 					JOptionPane.showMessageDialog(null, "sid cannot be null!");
 					return;
-				}else if(StringUtil.isEmpty(pidt)){
-					JOptionPane.showMessageDialog(null, "pid cannot be null!");
-					return;
 				}else if(StringUtil.isEmpty(eidt)){
 					JOptionPane.showMessageDialog(null, "eid cannot be null!");
 					return;
@@ -154,19 +139,19 @@ public class AddPsgScheduleFrm extends JFrame {
 					JOptionPane.showMessageDialog(null, "setime cannot be null!");
 					return;
 				}
-				
+
 				/* replace this commented block
-				 * with your query database code 
+				 * with your query database code
 				 * to insert values into schedulecontent table and schedule table
 				 */
 				PassengerTableViews ptv = new PassengerTableViews();
-				ptv.createScheduleContent(sidt, pidt, eidt, sstt, sett);
+				ptv.createScheduleContent(sidt, eidt, sstt, sett);
 			}
 		});
 		btnCreate_1.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnCreate_1.setBounds(91, 340, 123, 29);
+		btnCreate_1.setBounds(119, 331, 123, 29);
 		contentPane.add(btnCreate_1);
-		
+
 		btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -174,14 +159,13 @@ public class AddPsgScheduleFrm extends JFrame {
 			}
 		});
 		btnReset.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnReset.setBounds(285, 340, 123, 29);
-		contentPane.add(btnReset);	
-				
+		btnReset.setBounds(327, 331, 123, 29);
+		contentPane.add(btnReset);
+
 	}
-	
+
 	private void resetValues(){
 		this.sid_textField.setText("");
-		this.pid_textField.setText("");
 		this.eid_textField.setText("");
 		this.sstime_textField.setText("");
 		this.setime_textField.setText("");
