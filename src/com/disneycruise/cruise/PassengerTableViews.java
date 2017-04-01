@@ -2,6 +2,7 @@ package com.disneycruise.cruise;
 import java.sql.*;
 
 import com.disneycruise.database.Database;
+import java.util.Date;
 
 /**
  * Created by Sp05_ on 2017-03-24.
@@ -158,6 +159,30 @@ public class PassengerTableViews {
     }
 
     return rs;
+    }
+
+    public void createScheduleContent(String sid, String pid, String eid, String sstime, String setime) {
+        ResultSet rs = null;
+        String query = null;
+            query = "INSERT INTO schedulecontent " + "( sid, " + "eid, " + "sstime, " + "setime ) " +
+                    "VALUES (?, ?, ?, ?) ";
+
+        System.out.println(query);
+
+        try {
+
+                PreparedStatement stmt = conn.prepareStatement(query);
+
+                stmt.setString(1, sid);
+                stmt.setString(2, eid);
+                stmt.setDate(3, java.sql.Date.valueOf(sstime));
+                stmt.setDate(4, java.sql.Date.valueOf(setime));
+
+                stmt.executeUpdate();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
     }
 
 

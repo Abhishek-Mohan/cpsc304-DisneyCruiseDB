@@ -175,6 +175,7 @@ public class PsgSchedulesInterFrm extends JFrame {
 				 * with your query database code 
 				 * to remove a schedule by sid which in variable rmSchedule_textField
 				 */
+
 			}
 		});
 		

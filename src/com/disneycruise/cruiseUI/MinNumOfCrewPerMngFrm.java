@@ -76,11 +76,8 @@ public class MinNumOfCrewPerMngFrm extends JFrame {
 		try {
 			while (rs.next()) {
 				Vector v = new Vector();
-				v.add(rs.getString("pname"));
-				v.add(rs.getString("cid"));
-				v.add(rs.getString("cid"));
-				v.add(rs.getString("cid"));
-
+				v.add(rs.getString("man_id"));
+				v.add(rs.getString("numEmployees"));
 
 				dtm.addRow(v);
 			}

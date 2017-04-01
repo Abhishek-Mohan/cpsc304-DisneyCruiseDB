@@ -354,18 +354,6 @@ public class ManagerTableViews {
         return isEntertainmentManager;
     }
 
-    public ResultSet getMinNumOfCrewPerManager() {
-        ResultSet rs = null;
-        String query = "";
-        try {
-           Statement stmt =  conn.createStatement();
-            stmt.executeQuery(query);
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-        return rs;
-
-    }
 
     public ResultSet getDepartmentWithMaxNumberOfEmployees() {
         ResultSet rs = null;
@@ -375,10 +363,6 @@ public class ManagerTableViews {
                         "group by department " +
                         "having COUNT(*) = (select max(numE) from (SELECT COUNT(crew_id) AS numE FROM crew GROUP BY department)) ";
 
-//        query = "select department, COUNT(*) AS numEmployees " +
-//                "from crew " +
-//                "group by department " +
-//                "having COUNT(*) = 3 ";
 
         System.out.println(query);
         try {
@@ -391,5 +375,24 @@ public class ManagerTableViews {
 
     }
 
+    public ResultSet getMinNumOfCrewPerManager() {
+        ResultSet rs = null;
+        String query;
+        query = "select man_id, COUNT(*) AS numEmployees " +
+                "from managecrew " +
+                "group by man_id " +
+                "having COUNT(*) = (select min(numE) from (SELECT COUNT(crew_id) AS numE FROM managecrew GROUP BY man_id)) ";
 
-}
+        System.out.println(query);
+        try {
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return rs;
+
+    }
+    }
+
+

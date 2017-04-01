@@ -1,6 +1,8 @@
 package com.disneycruise.cruiseUI;
 
 
+import com.disneycruise.cruise.PassengerTableViews;
+
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -8,8 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-
+import java.util.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +18,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class AddPsgScheduleFrm extends JFrame {
 
@@ -122,8 +125,19 @@ public class AddPsgScheduleFrm extends JFrame {
 		btnCreate_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String sidt = sid_textField.getText(), pidt=pid_textField.getText();
-				String eidt = eid_textField.getText(), sstt=sstime_textField.getText();
+				String eidt = eid_textField.getText();
+				String sstt = sstime_textField.getText();
 				String sett = setime_textField.getText();
+
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date1 = null;
+				Date date2 = null;
+				try {
+					 date1 = dateFormat.parse(sstt);
+					 date2 = dateFormat.parse(sett);
+				} catch (ParseException pe) {
+					pe.printStackTrace();
+				}
 				if(StringUtil.isEmpty(sidt)){
 					JOptionPane.showMessageDialog(null, "sid cannot be null!");
 					return;
@@ -145,6 +159,8 @@ public class AddPsgScheduleFrm extends JFrame {
 				 * with your query database code 
 				 * to insert values into schedulecontent table and schedule table
 				 */
+				PassengerTableViews ptv = new PassengerTableViews();
+				ptv.createScheduleContent(sidt, pidt, eidt, sstt, sett);
 			}
 		});
 		btnCreate_1.setFont(new Font("Arial", Font.PLAIN, 18));
